@@ -1,70 +1,45 @@
-public class Driver implements Runnable {
-    private int id;
-    private boolean isWorking;
+public class Driver extends Worker {
     private int drivesCount;
     private int orangesCollected;
-    private long workTimeMs;
-    private long idleTimeMs;
 
     private static int idCounter = 1;
 
-    private WarehouseManager warehouseManager;
-
-    public Driver(WarehouseManager warehouseManager) {
-        this.id = idCounter++;
-        this.isWorking = true;
-        this.drivesCount = 0;
-        this.orangesCollected = 0;
-        this.workTimeMs = 0;
-        this.idleTimeMs = 0;
-
-        this.warehouseManager = warehouseManager;
+    // Synchronized to prevent duplicate IDs if multiple threads create drivers
+    private static synchronized int nextId() {
+        return idCounter++;
     }
 
-    public String toString() {
-        return "D #" + this.id + " [working: " + this.isWorking + ", drives: " + this.drivesCount + ", collected: " + this.orangesCollected + "] [WorkTime: " + this.workTimeMs / 1000 + ", IdleTime: " + this.idleTimeMs / 1000 + "]";
+    public Driver(WarehouseManager warehouseManager) {
+        super(nextId(), warehouseManager);
+        this.drivesCount = 0;
+        this.orangesCollected = 0;
     }
 
     @Override
     public void run() {
-        // Simulate Waiting at Start
-        MyUtils.sleep(MyUtils.getRandomNumber(Constants.DRIVER_MIN_DRIVE_TIME, Constants.DRIVER_MAX_DRIVE_TIME));
+        this.captureExecutionThread(); // Must be first!
 
-        while (this.isWorking) {
-            this.drive();
-            try {
-                this.collect();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        while (this.getIsWorking() && !Thread.currentThread().isInterrupted()) {
+
+            this.roleWork(Constants.DRIVER_MIN_DRIVE_TIME, Constants.DRIVER_MAX_DRIVE_TIME);
+            this.drivesCount++;
+
+            if (Thread.currentThread().isInterrupted()) {
+                break;
             }
+
+            this.warehouseWork(() -> this.getWarehouseManager().remove());
+            this.orangesCollected++;
         }
     }
 
-    public void drive() {
-        long startWorkTimeMs = System.nanoTime();
-
-        // Simulate Drive/working
-        MyUtils.sleep(MyUtils.getRandomNumber(Constants.DRIVER_MIN_DRIVE_TIME, Constants.DRIVER_MAX_DRIVE_TIME));
-        this.drivesCount++;
-
-        long endWorkTimeMs = System.nanoTime();
-        this.workTimeMs += (endWorkTimeMs - startWorkTimeMs) / 1_000_000; // Converting Nano To Millis
-    }
-
-    public void collect() throws InterruptedException {
-        this.idleTimeMs += this.warehouseManager.remove();
-        this.orangesCollected++;
-    }
-
-    public long getWorkTimeMs() {
-        return this.workTimeMs;
-    }
-
-    public long getIdleTimeMs() {
-        return this.idleTimeMs;
-    }
-
-    public void fire() {
-        this.isWorking = false;
+    @Override
+    public String toString() {
+        return "D #" + this.getId()
+                + " [working: " + this.getIsWorking()
+                + ", drives: " + this.drivesCount
+                + ", collected: " + this.orangesCollected
+                + "] [WorkTime: " + this.getWorkTimeSec()
+                + "s, IdleTime: " + this.getIdleTimeMs() / 1000 + "s]";
     }
 }

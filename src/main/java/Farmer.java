@@ -1,68 +1,45 @@
-public class Farmer implements Runnable {
-    private int id;
-    private boolean isWorking;
+public class Farmer extends Worker {
     private int orangesPicked;
     private int orangesStored;
-    private long workTimeMs;
-    private long idleTimeMs;
 
     private static int idCounter = 1;
 
-    private WarehouseManager warehouseManager;
-
-    public Farmer(WarehouseManager warehouseManager) {
-        this.id = idCounter++;
-        this.isWorking = true;
-        this.orangesPicked = 0;
-        this.orangesStored = 0;
-        this.workTimeMs = 0;
-        this.idleTimeMs = 0;
-
-        this.warehouseManager = warehouseManager;
+    // Synchronized to prevent duplicate IDs if multiple threads create farmers
+    private static synchronized int nextId() {
+        return idCounter++;
     }
 
-    public String toString() {
-        return "F #" + this.id + " [working: " + this.isWorking + ", picked: " + this.orangesPicked + ", stored: " + this.orangesStored + "] [WorkTime: " + this.workTimeMs / 1000 + ", IdleTime: " + this.idleTimeMs / 1000 + "]";
+    public Farmer(WarehouseManager warehouseManager) {
+        super(nextId(), warehouseManager);
+        this.orangesPicked = 0;
+        this.orangesStored = 0;
     }
 
     @Override
     public void run() {
-        while (isWorking) {
-            this.pickOrange();
-            try {
-                this.storeOrange();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        this.captureExecutionThread(); // Must be first!
+
+        while (this.getIsWorking() && !Thread.currentThread().isInterrupted()) {
+
+            this.roleWork(Constants.FARMER_MIN_PICKING_TIME, Constants.FARMER_MAX_PICKING_TIME);
+            this.orangesPicked++;
+
+            if (Thread.currentThread().isInterrupted()) {
+                break;
             }
+
+            this.warehouseWork(() -> this.getWarehouseManager().add());
+            this.orangesStored++;
         }
     }
 
-    public void pickOrange() {
-        long startWorkTimeMs = System.nanoTime();
-
-        // Simulate harvesting/working
-        MyUtils.sleep(MyUtils.getRandomNumber(Constants.FARMER_MIN_PICKING_TIME, Constants.FARMER_MAX_PICKING_TIME));
-        this.orangesPicked++;
-
-        long endWorkTimeMs = System.nanoTime();
-        this.workTimeMs += (endWorkTimeMs - startWorkTimeMs) / 1_000_000; // Converting Nano To Millis
-    }
-
-    public void storeOrange() throws InterruptedException {
-        this.idleTimeMs += this.warehouseManager.add();
-        this.orangesStored++;
-    }
-
-    public long getWorkTimeMs() {
-        return this.workTimeMs;
-    }
-
-    public long getIdleTimeMs() {
-        return this.idleTimeMs;
-    }
-
-    public void fire()
-    {
-        this.isWorking = false;
+    @Override
+    public String toString() {
+        return "F #" + this.getId()
+                + " [working: " + this.getIsWorking()
+                + ", picked: " + this.orangesPicked
+                + ", stored: " + this.orangesStored
+                + "] [WorkTime: " + this.getWorkTimeSec()
+                + "s, IdleTime: " + this.getIdleTimeMs() / 1000 + "s]";
     }
 }

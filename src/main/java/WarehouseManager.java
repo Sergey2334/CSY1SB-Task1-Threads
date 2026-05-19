@@ -8,38 +8,22 @@ public class WarehouseManager implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            synchronized (System.out) {
-                System.out.println(this.warehouse);
-                System.out.println();
-            }
-            MyUtils.sleep(5 * 1000);
-        }
+
     }
 
-    public synchronized long add() throws InterruptedException {
-        long startIdleTimeMs = System.nanoTime();
-
+    public synchronized void add() throws InterruptedException {
         while (this.warehouse.getIsFull()) {
             wait();
         }
         this.warehouse.add();
         notifyAll();
-
-        long endIdleTimeMs = System.nanoTime();
-        return (endIdleTimeMs - startIdleTimeMs) / 1_000_000;
     }
 
-    public synchronized long remove() throws InterruptedException {
-        long startIdleTimeMs = System.nanoTime();
-
+    public synchronized void remove() throws InterruptedException {
         while (this.warehouse.getIsEmpty()) {
             wait();
         }
         this.warehouse.remove();
         notifyAll();
-
-        long endIdleTimeMs = System.nanoTime();
-        return (endIdleTimeMs - startIdleTimeMs) / 1_000_000;
     }
 }
