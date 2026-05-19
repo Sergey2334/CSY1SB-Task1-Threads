@@ -1,3 +1,7 @@
+package Root.Model;
+
+import Root.Core.Constants;
+
 public class Farmer extends Worker {
     private int orangesPicked;
     private int orangesStored;

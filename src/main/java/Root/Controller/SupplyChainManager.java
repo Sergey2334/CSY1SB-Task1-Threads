@@ -1,3 +1,11 @@
+package Root.Controller;
+
+import Root.Core.MyUtils;
+import Root.Model.Driver;
+import Root.Model.Farmer;
+import Root.Model.Warehouse;
+import Root.Model.WarehouseManager;
+
 public class SupplyChainManager implements Runnable {
     private WarehouseManager warehouseManager;
     private WorkerManager farmersManager;
@@ -33,15 +41,20 @@ public class SupplyChainManager implements Runnable {
         farmersThread.start();
         driversThread.start();
 
-        while (true) {
-            MyUtils.sleep(2000); // Check status every 2 seconds
+        while ((farmersThread.isAlive()) && (driversThread.isAlive())) {
+            MyUtils.sleep(2 * 1000); // Check status every 2 seconds
             System.out.println("=== SYSTEM SNAPSHOT ===");
-            System.out.println(warehouse);
+            System.out.println(this.warehouse);
             System.out.println("-----------------------");
-            farmersManager.printWorkers();
+            this.farmersManager.printWorkers();
             System.out.println();
-            driversManager.printWorkers();
+            this.driversManager.printWorkers();
             System.out.println("=======================\n");
         }
     }
+
+    // --- Getters ---
+    public Warehouse getWarehouse() { return this.warehouse; }
+    public WorkerManager<Farmer> getFarmersManager() { return this.farmersManager; }
+    public WorkerManager<Driver> getDriversManager() { return this.driversManager; }
 }

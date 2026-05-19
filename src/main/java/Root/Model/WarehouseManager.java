@@ -1,3 +1,5 @@
+package Root.Model;
+
 public class WarehouseManager implements Runnable {
     private Warehouse warehouse;
 

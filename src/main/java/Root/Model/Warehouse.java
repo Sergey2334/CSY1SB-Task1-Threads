@@ -1,3 +1,7 @@
+package Root.Model;
+
+import Root.Core.Constants;
+
 public class Warehouse {
     private int totalCapacity;
     private int currentCapacity;

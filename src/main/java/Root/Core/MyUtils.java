@@ -1,3 +1,5 @@
+package Root.Core;
+
 import java.util.Random;
 
 public final class MyUtils {

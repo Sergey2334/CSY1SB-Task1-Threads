@@ -1,3 +1,5 @@
+package Root.Core;
+
 public final class Constants {
     private Constants() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
@@ -10,4 +12,6 @@ public final class Constants {
 
     public static final int DRIVER_MIN_DRIVE_TIME = 2 * 1000;
     public static final int DRIVER_MAX_DRIVE_TIME = 3 * 1000;
+
+    public static final int MAX_IDLE_TIME_BEFORE_FIRE = 2 * 1000;
 }

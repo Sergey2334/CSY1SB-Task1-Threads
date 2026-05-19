@@ -1,3 +1,8 @@
+package Root.Model;
+
+import Root.Core.MyUtils;
+import Root.Core.WarehouseAction;
+
 public abstract class Worker implements Runnable {
     private int id;
     private boolean isWorking;

@@ -1,3 +1,10 @@
+package Root.Controller;
+
+import Root.Core.Constants;
+import Root.Core.MyUtils;
+import Root.Model.WarehouseManager;
+import Root.Model.Worker;
+
 import java.util.LinkedList;
 
 public class WorkerManager<W extends Worker> implements Runnable {
@@ -12,15 +19,15 @@ public class WorkerManager<W extends Worker> implements Runnable {
 
     @Override
     public void run() {
-        this.startWorkers();
+        this.initializeWorkers();
 
-        while (true) {
+        while (!this.workers.isEmpty()) {
             MyUtils.sleep(2 * 1000); // Gives the CPU some time to Breathe
 
             synchronized (this) {
                 for (int i = this.workers.size() - 1; i >= 0; i--) {
                     W worker = this.workers.get(i);
-                    if (worker.getIdleTimeMs() >= 2 * 1000) {
+                    if (worker.getIdleTimeMs() >= Constants.MAX_IDLE_TIME_BEFORE_FIRE) {
                         worker.fire();
                         this.workers.remove(i);
                     }
@@ -35,19 +42,13 @@ public class WorkerManager<W extends Worker> implements Runnable {
         }
     }
 
-    private void startWorkers() {
-        this.initializeWorkers();
-
-        for (W worker : this.workers) {
-            Thread workerThread = new Thread(worker);
-            workerThread.start();
-        }
-    }
-
     public synchronized void addWorker() {
         // Use the factory to safely bypass Type Erasure!
         W newWorker = this.factory.create(this.warehouseManager);
         this.workers.add(newWorker);
+
+        Thread workerThread = new Thread(newWorker);
+        workerThread.start();
     }
 
     public synchronized void removeWorker(W worker) {
@@ -61,5 +62,10 @@ public class WorkerManager<W extends Worker> implements Runnable {
         for (W worker : this.workers) {
             System.out.println(worker);
         }
+    }
+
+    // --- Getters ---
+    public LinkedList<W> getWorkers() {
+        return this.workers;
     }
 }

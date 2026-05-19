@@ -1,4 +1,6 @@
-import MainWindow.MainWindow;
+package Root;
+
+import Root.Controller.SupplyChainManager;
 
 public class Main {
     public static void main(String[] args) {

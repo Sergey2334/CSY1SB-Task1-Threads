@@ -1,3 +1,7 @@
+package Root.Model;
+
+import Root.Core.Constants;
+
 public class Driver extends Worker {
     private int drivesCount;
     private int orangesCollected;
