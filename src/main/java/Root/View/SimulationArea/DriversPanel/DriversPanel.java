@@ -28,4 +28,9 @@ public class DriversPanel extends JPanel {
         this.add(this.driversVisuals, "grow x, grow y, push x, push y");
         this.add(this.driversStats, "grow x, grow y, push x, push y");
     }
+
+    public void setDriversAmount(int driversAmount)
+    {
+        this.driversVisuals.setDriversAmount(driversAmount);
+    }
 }

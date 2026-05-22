@@ -11,15 +11,13 @@ public class SliderPanel extends JPanel {
     }
 
     private void initialize() {
-        // "wrap 1" forces a new row after every single component (vertical stacking)
-        // "gap 10 10" sets a 10px horizontal gap and 10px vertical gap between elements
-        // "insets 0" removes external margins around the panel (adjust if you want padding)
-        this.setLayout(new MigLayout("wrap 3, gap 5 5, insets 0 0 0 5"));
-        this.add(new WorkerSpeedSlider("Framer"), "grow x, push x");
-        this.add(new SimulationControlButton("ADD Farmer"), "grow x, push x");
-        this.add(new SimulationControlButton("SUB Farmer"), "grow x, push x");
-        this.add(new WorkerSpeedSlider("Driver"), "grow x, push x");
-        this.add(new SimulationControlButton("ADD Farmer"), "grow x, push x");
-        this.add(new SimulationControlButton("SUB Farmer"), "grow x, push x");
+        this.setLayout(new MigLayout("wrap 3, fill , align center"));
+
+        this.add(new WorkerSpeedSlider("Framer"));
+        this.add(new SimulationControlButton("ADD Farmer"));
+        this.add(new SimulationControlButton("SUB Farmer"));
+        this.add(new WorkerSpeedSlider("Driver"));
+        this.add(new SimulationControlButton("ADD Farmer"));
+        this.add(new SimulationControlButton("SUB Farmer"));
     }
 }

@@ -11,10 +11,10 @@ public class AddSubResetPanel extends JPanel {
     }
     private void initialize()
     {
-        this.setLayout(new MigLayout("gap 10 10, insets 5 5 5 5"));
+        this.setLayout(new MigLayout("fill , align center"));
 
-        this.add(new SimulationControlButton("SUB CAP"), "grow x, push x");
-        this.add(new SimulationControlButton("RESET"), "grow x, push x");
-        this.add(new SimulationControlButton("ADD CAP"), "grow x, push x");
+        this.add(new SimulationControlButton("SUB CAP"));
+        this.add(new SimulationControlButton("RESET"));
+        this.add(new SimulationControlButton("ADD CAP"));
     }
 }

@@ -12,10 +12,11 @@ public class SupplyChainManager implements Runnable {
     private WorkerManager driversManager;
 
     private Warehouse warehouse = new Warehouse();
+    private SimulationVisualManager simulationVisualManager;
 
-    public SupplyChainManager() {
+    public SupplyChainManager(SimulationVisualManager simulationVisualManager) {
         this.warehouseManager = new WarehouseManager(this.warehouse);
-
+        this.simulationVisualManager = simulationVisualManager;
         /*
         Replacing this...
         this.farmerManager = new WorkerManager<Farmer>(this.warehouseManager, new WorkerFactory<Farmer>() {
@@ -28,7 +29,16 @@ public class SupplyChainManager implements Runnable {
 
         this.farmersManager = new WorkerManager<Farmer>(this.warehouseManager, Farmer::new);
         this.driversManager = new WorkerManager<Driver>(this.warehouseManager, manager -> new Driver(manager));
+    }
 
+    private void update() {
+        int farmerAmount = this.farmersManager.getWorkers().size();
+        int orangesAmount = this.warehouse.getCurrentCapacity();
+        int driverAmount = this.driversManager.getWorkers().size();
+
+        this.simulationVisualManager.setFarmersWorkers(farmerAmount);
+        this.simulationVisualManager.setWarehouseOranges(orangesAmount);
+        this.simulationVisualManager.setDriversWorkers(driverAmount);
     }
 
     @Override
@@ -37,24 +47,41 @@ public class SupplyChainManager implements Runnable {
         Thread farmersThread = new Thread(this.farmersManager);
         Thread driversThread = new Thread(this.driversManager);
 
+        Thread simulationVisualsThread = new Thread(this.simulationVisualManager);
+
         warehouseThread.start();
         farmersThread.start();
         driversThread.start();
+        simulationVisualsThread.start();
 
         while ((farmersThread.isAlive()) && (driversThread.isAlive())) {
-            MyUtils.sleep(2 * 1000); // Check status every 2 seconds
-            System.out.println("=== SYSTEM SNAPSHOT ===");
-            System.out.println(this.warehouse);
-            System.out.println("-----------------------");
-            this.farmersManager.printWorkers();
-            System.out.println();
-            this.driversManager.printWorkers();
-            System.out.println("=======================\n");
+            this.update();
+
+//            MyUtils.sleep(2 * 1000); // Check status every 2 seconds
+//            System.out.println("=== SYSTEM SNAPSHOT ===");
+//            System.out.println(this.warehouse);
+//            System.out.println("-----------------------");
+//            this.farmersManager.printWorkers();
+//            System.out.println();
+//            this.driversManager.printWorkers();
+//            System.out.println("=======================\n");
         }
     }
 
     // --- Getters ---
-    public Warehouse getWarehouse() { return this.warehouse; }
-    public WorkerManager<Farmer> getFarmersManager() { return this.farmersManager; }
-    public WorkerManager<Driver> getDriversManager() { return this.driversManager; }
+    public Warehouse getWarehouse() {
+        return this.warehouse;
+    }
+
+    public WarehouseManager getWarehouseManager() {
+        return this.warehouseManager;
+    }
+
+    public WorkerManager<Farmer> getFarmersManager() {
+        return this.farmersManager;
+    }
+
+    public WorkerManager<Driver> getDriversManager() {
+        return this.driversManager;
+    }
 }

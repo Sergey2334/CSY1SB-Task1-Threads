@@ -22,20 +22,27 @@ public class SimulationControlsArea extends JPanel {
     }
 
     private void initialize() {
-        // "fillx" makes the layout engine stretch across the full width of the parent container
-        // "insets 15 10 10 10" gives breathing room below your titled border
-        this.setLayout(new MigLayout("fillx"));
-        FlatLineBorder flatLineBorder = new FlatLineBorder(new Insets(1, 1, 1, 1), Color.GRAY, 1, 16);
+        // 1. "fill" stretches the whole grid vertically and horizontally
+        String layoutConstraints = "fill, insets 0";
+
+        // 2. Lock columns into exact proportions: 35%, 30%, 35%
+        String columnConstraints = "[35%, align center, grow][30%, align center, grow][35%, align center, grow]";
+
+        // 3. Stretches the row vertically to fill the full height
+        String rowConstraints    = "[align center]";
+
+        this.setLayout(new MigLayout(layoutConstraints, columnConstraints, rowConstraints));
+    }
+
+    private void initializeComponents() {
         this.setBorder(ViewUtills.createCustomTitledBorder("SIMULATION CONTROLS", true));
 
         this.sliderPanel = new SliderPanel();
         this.addSubResetPanel = new AddSubResetPanel();
         this.startPauseResumePanel = new StartPauseResumePanel();
-    }
 
-    private void initializeComponents() {
-        this.add(this.sliderPanel, "grow x, push x 25");
-        this.add(this.addSubResetPanel, "grow x, push x 50");
-        this.add(this.startPauseResumePanel, "grow x, push x 25");
+        this.add(this.sliderPanel);
+        this.add(this.addSubResetPanel);
+        this.add(this.startPauseResumePanel);
     }
 }

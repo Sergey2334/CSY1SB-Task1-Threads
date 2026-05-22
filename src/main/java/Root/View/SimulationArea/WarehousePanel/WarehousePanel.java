@@ -4,7 +4,6 @@ import Root.View.ViewUtills.ViewUtills;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class WarehousePanel extends JPanel {
     private WarehouseStorage warehouseStorage;
@@ -26,5 +25,9 @@ public class WarehousePanel extends JPanel {
 
         this.add(this.warehouseStorage, "grow x, grow y, push x, push y");
         this.add(this.warehouseStats, "grow x, grow y, push x, push y");
+    }
+
+    public void setOrangesAmount(int orangesAmount) {
+        this.warehouseStorage.setOrangesAmount(orangesAmount);
     }
 }

@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    private SimulationArea simulationArea = new SimulationArea();
-    private SimulationControlsArea simulationControlsArea = new SimulationControlsArea();
+    private SimulationArea simulationArea;
+    private SimulationControlsArea simulationControlsArea;
 
     public MainWindow() {
         this.initialize();
@@ -47,6 +47,9 @@ public class MainWindow extends JFrame {
     }
 
     private void initializeComponents() {
+        this.simulationArea = new SimulationArea();
+        this.simulationControlsArea = new SimulationControlsArea();
+
         this.initializeImageIcon();
         this.add(new JSeparator(), BorderLayout.NORTH);
         this.add(simulationArea, BorderLayout.CENTER);

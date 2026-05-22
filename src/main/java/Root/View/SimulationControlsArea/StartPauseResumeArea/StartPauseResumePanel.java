@@ -12,9 +12,9 @@ public class StartPauseResumePanel extends JPanel {
 
     private void initialize()
     {
-        this.setLayout(new MigLayout("gap 10 10, insets 5 5 5 5"));
+        this.setLayout(new MigLayout("fill , align center"));
 
-        this.add(new SimulationControlButton("START SIMULATION"), "grow x, push x");
-        this.add(new SimulationControlButton("TOGGLE PAUSE/RESUME"), "grow x, push x");
+        this.add(new SimulationControlButton("START SIMULATION"));
+        this.add(new SimulationControlButton("TOGGLE PAUSE/RESUME"));
     }
 }

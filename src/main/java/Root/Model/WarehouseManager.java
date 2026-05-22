@@ -7,10 +7,9 @@ public class WarehouseManager implements Runnable {
         this.warehouse = warehouse;
     }
 
-
     @Override
     public void run() {
-
+        
     }
 
     public synchronized void add() throws InterruptedException {
