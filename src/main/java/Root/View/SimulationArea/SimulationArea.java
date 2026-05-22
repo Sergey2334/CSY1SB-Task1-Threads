@@ -1,6 +1,6 @@
 package Root.View.SimulationArea;
 
-import Root.Controller.SimulationVisualManager;
+import Root.Model.SimulationVisualManager;
 import Root.Controller.SupplyChainManager;
 import Root.View.SimulationArea.DriversPanel.DriversPanel;
 import Root.View.SimulationArea.FarmersPanel.FarmersPanel;
@@ -8,6 +8,7 @@ import Root.View.SimulationArea.WarehousePanel.WarehousePanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class SimulationArea extends JPanel {
     private FarmersPanel farmersPanel;
@@ -51,6 +52,4 @@ public class SimulationArea extends JPanel {
 
         supplyChainThread.start();
     }
-
-
 }

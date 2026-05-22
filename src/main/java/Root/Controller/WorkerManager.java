@@ -37,7 +37,7 @@ public class WorkerManager<W extends Worker> implements Runnable {
     }
 
     private void initializeWorkers() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < Constants.WORKERS_AMOUNT_START; i++) {
             this.addWorker();
         }
     }

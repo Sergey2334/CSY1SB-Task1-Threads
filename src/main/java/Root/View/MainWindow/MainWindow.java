@@ -2,7 +2,6 @@ package Root.View.MainWindow;
 
 import Root.View.SimulationArea.SimulationArea;
 import Root.View.SimulationControlsArea.SimulationControlsArea;
-import com.formdev.flatlaf.extras.components.FlatSeparator;
 
 import javax.swing.*;
 import java.awt.*;

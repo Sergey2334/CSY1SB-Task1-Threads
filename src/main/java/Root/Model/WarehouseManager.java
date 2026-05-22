@@ -9,7 +9,7 @@ public class WarehouseManager implements Runnable {
 
     @Override
     public void run() {
-        
+
     }
 
     public synchronized void add() throws InterruptedException {

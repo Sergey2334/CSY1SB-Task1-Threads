@@ -1,16 +1,9 @@
 package Root;
 
-import Root.Controller.SimulationVisualManager;
-import Root.Controller.SupplyChainManager;
 import Root.View.MainWindow.MainWindow;
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.extras.FlatInspector;
 import com.formdev.flatlaf.extras.FlatUIDefaultsInspector;
-import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatSpacegrayIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTAtomOneDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTMaterialPalenightIJTheme;
 
 import javax.swing.*;
 

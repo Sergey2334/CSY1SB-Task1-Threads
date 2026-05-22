@@ -1,10 +1,7 @@
 package Root.Controller;
 
-import Root.Core.MyUtils;
-import Root.Model.Driver;
-import Root.Model.Farmer;
-import Root.Model.Warehouse;
-import Root.Model.WarehouseManager;
+import Root.Model.*;
+import Root.Model.SimulationVisualManager;
 
 public class SupplyChainManager implements Runnable {
     private WarehouseManager warehouseManager;
@@ -15,8 +12,8 @@ public class SupplyChainManager implements Runnable {
     private SimulationVisualManager simulationVisualManager;
 
     public SupplyChainManager(SimulationVisualManager simulationVisualManager) {
-        this.warehouseManager = new WarehouseManager(this.warehouse);
         this.simulationVisualManager = simulationVisualManager;
+        this.warehouseManager = new WarehouseManager(this.warehouse);
         /*
         Replacing this...
         this.farmerManager = new WorkerManager<Farmer>(this.warehouseManager, new WorkerFactory<Farmer>() {

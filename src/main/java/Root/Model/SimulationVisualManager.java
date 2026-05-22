@@ -1,4 +1,4 @@
-package Root.Controller;
+package Root.Model;
 
 import Root.Core.MyUtils;
 import Root.View.SimulationArea.DriversPanel.DriversPanel;
