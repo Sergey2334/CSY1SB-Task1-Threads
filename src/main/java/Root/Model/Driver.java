@@ -46,4 +46,12 @@ public class Driver extends Worker {
                 + "] [WorkTime: " + this.getWorkTimeSec()
                 + "s, IdleTime: " + this.getIdleTimeMs() / 1000 + "s]";
     }
+
+    // --- Getters ---
+    public int  getDrivesCount() {
+        return this.drivesCount;
+    }
+    public int getOrangesCollected() {
+        return this.orangesCollected;
+    }
 }

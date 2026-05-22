@@ -1,60 +1,53 @@
 package Root.View;
 
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
-import Root.Controller.SupplyChainManager;
-import Root.Model.Warehouse;
-import Root.Model.Farmer;
-import Root.Model.Driver;
 
 public class MainWindow extends JFrame {
-    private SimulationArea simulationArea;
-    private SimulationControlsArea controlsArea;
-    private SupplyChainManager engine;
-    private javax.swing.Timer uiRefreshTimer;
+    private SimulationArea simulationArea = new SimulationArea();
+    private SimulationControlsArea simulationControlsArea = new SimulationControlsArea();
 
-    public MainWindow(SupplyChainManager engine) {
-        this.engine = engine;
+    public MainWindow() {
+        this.initialize();
+        this.initializeComponents();
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Custom Graphics Engine Simulator");
-        this.setSize(1200, 600);
-        this.setResizable(false);
-        this.setLayout(new BorderLayout());
-
-        this.controlsArea = new SimulationControlsArea();
-        this.simulationArea = new SimulationArea();
-
-        this.add(this.controlsArea, BorderLayout.SOUTH);
-        this.add(this.simulationArea, BorderLayout.CENTER);
-
-        this.setupControlActions();
-        this.startLiveRefreshClock();
-
-        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
-    private void setupControlActions() {
-        this.controlsArea.getAddFarmerBtn().addActionListener(e -> {
-            this.engine.getFarmersManager().addWorker();
-        });
+    private void initialize() {
+        this.setTitle("Producer Consumer Simulation");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1200, 800);
 
-        this.controlsArea.getAddDriverBtn().addActionListener(e -> {
-            this.engine.getDriversManager().addWorker();
-        });
+//        this.getRootPane().putClientProperty("JRootPane.titleBarHeight", 35);
+//        this.setResizable(false);
+        this.setLayout(new BorderLayout());
+
+//        this.pack();
+        this.setLocationRelativeTo(null);
     }
 
-    private void startLiveRefreshClock() {
-        this.uiRefreshTimer = new javax.swing.Timer(50, e -> { // Spun up to 50ms for hyper-smooth renders
-            Warehouse wh = this.engine.getWarehouse();
-            LinkedList<Farmer> farmers = this.engine.getFarmersManager().getWorkers();
-            LinkedList<Driver> drivers = this.engine.getDriversManager().getWorkers();
+    // --- Load and Set Window Icon Image ---
+    private void initializeImageIcon() {
+        try {
+            java.net.URL iconURL = getClass().getResource("/orange-icon.png");
+            if (iconURL != null) {
+                ImageIcon icon = new ImageIcon(iconURL);
+                this.setIconImage(icon.getImage());
+            } else {
+                System.err.println("Could not find orange-icon.png resource file!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            // Fire data down into our custom Java2D engine repainter
-            this.simulationArea.updateEngineSnapshot(wh, farmers, drivers);
-        });
-        this.uiRefreshTimer.start();
+    private void initializeComponents() {
+        this.initializeImageIcon();
+        this.add(new JSeparator(), BorderLayout.NORTH);
+        this.add(simulationArea, BorderLayout.CENTER);
+        this.add(simulationControlsArea, BorderLayout.SOUTH);
     }
 }

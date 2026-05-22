@@ -14,4 +14,6 @@ public final class Constants {
     public static final int DRIVER_MAX_DRIVE_TIME = 3 * 1000;
 
     public static final int MAX_IDLE_TIME_BEFORE_FIRE = 2 * 1000;
+
+    public static final String coolFont1 = "Trebuchet MS";
 }

@@ -14,7 +14,36 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- Testing GUI Libraries-->
+        <!-- Source: https://mvnrepository.com/artifact/com.formdev/flatlaf -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.7.1</version>
+<!--            <scope>runtime</scope>-->
+        </dependency>
 
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-intellij-themes</artifactId>
+            <version>3.7.1</version> <!-- Match your main FlatLaf version -->
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/com.formdev/flatlaf-extras -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-extras</artifactId>
+            <version>3.7.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/com.miglayout/miglayout-swing -->
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>11.4.3</version>
+<!--            <scope>compile</scope>-->
+        </dependency>
     </dependencies>
 
 </project>

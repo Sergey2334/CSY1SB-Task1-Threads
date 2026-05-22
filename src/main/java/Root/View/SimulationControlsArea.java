@@ -1,40 +1,31 @@
 package Root.View;
 
+import Root.Core.Constants;
+import com.formdev.flatlaf.ui.FlatLineBorder;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SimulationControlsArea extends JPanel {
-    private JButton addFarmerBtn;
-    private JButton addDriverBtn;
-
     public SimulationControlsArea() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 15));
-        this.setBackground(new Color(52, 58, 64)); // Darker matte gray dashboard panel
-        this.createUIComponents();
+        this.initialize();
+        this.initializeComponents();
     }
 
-    private void createUIComponents() {
-        this.addFarmerBtn = new JButton("Hire New Farmer (+)");
-        this.addDriverBtn = new JButton("Hire New Driver (+)");
-
-        // Add minimalist look adjustments
-        configureButtonStyles(this.addFarmerBtn, new Color(40, 167, 69));
-        configureButtonStyles(this.addDriverBtn, new Color(0, 123, 255));
-
-        this.add(this.addFarmerBtn);
-        this.add(this.addDriverBtn);
+    private void initialize() {
+        this.setLayout(new FlowLayout());
+        FlatLineBorder flatLineBorder = new FlatLineBorder(new Insets(1, 1, 1, 1), Color.GRAY, 1, 16);
+        this.setBorder(BorderFactory.createTitledBorder(flatLineBorder,
+                "SIMULATION CONTROLS",
+                2,
+                2,
+                new Font(Constants.coolFont1, Font.BOLD, 16),
+                Color.WHITE));
     }
 
-    private void configureButtonStyles(JButton btn, Color bg) {
-        btn.setPreferredSize(new Dimension(200, 40));
-        btn.setFont(new Font("SansSerif", Font.BOLD, 13));
-        btn.setBackground(bg);
-        btn.setForeground(Color.WHITE);
-        btn.setFocusPainted(false);
-        btn.setBorderPainted(false);
-        btn.setOpaque(true);
+    private void initializeComponents() {
+        this.add(new SimulationControlButton("TEST1"));
+        this.add(new SimulationControlButton("TEST2"));
+        this.add(new SimulationControlButton("TEST3"));
     }
-
-    public JButton getAddFarmerBtn() { return this.addFarmerBtn; }
-    public JButton getAddDriverBtn() { return this.addDriverBtn; }
 }

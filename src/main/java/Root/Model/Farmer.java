@@ -46,4 +46,12 @@ public class Farmer extends Worker {
                 + "] [WorkTime: " + this.getWorkTimeSec()
                 + "s, IdleTime: " + this.getIdleTimeMs() / 1000 + "s]";
     }
+
+    // --- Getters ---
+    public int getOrangesPicked() {
+        return this.orangesPicked;
+    }
+    public int getOrangesStored() {
+        return this.orangesStored;
+    }
 }
