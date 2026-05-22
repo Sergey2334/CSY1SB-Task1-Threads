@@ -1,15 +1,14 @@
 package Root;
 
 import Root.Controller.SupplyChainManager;
-import Root.View.MainWindow;
+import Root.View.MainWindow.MainWindow;
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.extras.FlatInspector;
 import com.formdev.flatlaf.extras.FlatUIDefaultsInspector;
-import com.formdev.flatlaf.intellijthemes.*;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.*;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
