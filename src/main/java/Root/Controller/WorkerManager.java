@@ -14,22 +14,26 @@ public class WorkerManager<W extends Worker> implements Runnable {
 
     private int totalWorkers = 0;
 
+    private boolean start;
     private boolean isPaused;
 
     public WorkerManager(WarehouseManager warehouseManager, WorkerFactory<W> factory) {
         this.warehouseManager = warehouseManager;
         this.factory = factory;
 
+        this.start = false;
         this.isPaused = false;
     }
 
     @Override
     public void run() {
+        while (!this.start) {
+            MyUtils.sleep(100);
+        }
         this.initializeWorkers();
 
-        while (!this.workers.isEmpty() ) {
-            while(!this.isPaused)
-            {
+        while (!this.workers.isEmpty()) {
+            while (!this.isPaused) {
                 MyUtils.sleep(2 * 1000); // Gives the CPU some time to Breathe
 
                 synchronized (this) {
@@ -43,6 +47,10 @@ public class WorkerManager<W extends Worker> implements Runnable {
                 }
             }
         }
+    }
+
+    public void start() {
+        this.start = true;
     }
 
     public void togglePause() {

@@ -85,6 +85,8 @@ public class SimulationControls {
     // STRAT_PAUSE/RESUME Panel
     public ActionListener getStartAction() {
         return (e) -> {
+            this.supplyChainManager.getFarmersManager().start();
+            this.supplyChainManager.getDriversManager().start();
             this.supplyChainManager.setStarted();
         };
     }
