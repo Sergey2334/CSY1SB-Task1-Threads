@@ -8,7 +8,7 @@ public final class Constants {
     }
 
     public static final int WAREHOUSE_START_MAX_CAPACITY = 10;
-    public static final int WORKERS_AMOUNT_START = 5;
+    public static final int WORKERS_AMOUNT_START = 500;
 
     public static final int FARMER_MIN_PICKING_TIME = 1 * 1000;
     public static final int FARMER_MAX_PICKING_TIME = 3 * 1000;
@@ -20,6 +20,7 @@ public final class Constants {
 
     public static final String COOL_FONT1_STRING = "Trebuchet MS";
     public static final Font COOL_FONT1 = new Font(COOL_FONT1_STRING, Font.BOLD, 20);
+    public static final Font COOL_FONT1_WORKER = new Font(COOL_FONT1_STRING, Font.BOLD, 10);
 
     public static final Color FARMER_COLOR = new Color(31, 241, 66, 255);
     public static final Color DRIVER_COLOR = new Color(31, 130, 241, 255);

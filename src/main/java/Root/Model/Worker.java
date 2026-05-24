@@ -6,6 +6,7 @@ import Root.Core.WarehouseAction;
 public abstract class Worker implements Runnable {
     private int id;
     private boolean isWorking;
+    private boolean isIdle;
     private int roleWorkCount;
     private int warehouseWorkCount;
     private long workTimeSec;
@@ -20,6 +21,7 @@ public abstract class Worker implements Runnable {
     public Worker(int id, WarehouseManager warehouseManager) {
         this.id = id;
         this.isWorking = true;
+        this.isIdle = false;
         this.roleWorkCount = 0;
         this.warehouseWorkCount = 0;
         this.workTimeSec = 0;
@@ -63,7 +65,9 @@ public abstract class Worker implements Runnable {
         }
 
         try {
+            this.isIdle = true;
             action.execute();
+            this.isIdle = false;
             this.warehouseWorkCount++;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -99,6 +103,10 @@ public abstract class Worker implements Runnable {
         }
         long liveWaitMs = (System.nanoTime() - this.currentWaitStartNs) / 1_000_000;
         return this.accumulatedIdleTimeMs + liveWaitMs;
+    }
+
+    public synchronized boolean getIsIdle() {
+        return this.isIdle;
     }
 
     public int getId() {

@@ -12,6 +12,8 @@ public class WorkerManager<W extends Worker> implements Runnable {
     private LinkedList<W> workers = new LinkedList<>();
     private WorkerFactory<W> factory; // The factory that knows how to make 'W'
 
+    private int totalWorkers = 0;
+
     public WorkerManager(WarehouseManager warehouseManager, WorkerFactory<W> factory) {
         this.warehouseManager = warehouseManager;
         this.factory = factory;
@@ -47,6 +49,8 @@ public class WorkerManager<W extends Worker> implements Runnable {
         W newWorker = this.factory.create(this.warehouseManager);
         this.workers.add(newWorker);
 
+        this.totalWorkers++;
+
         Thread workerThread = new Thread(newWorker);
         workerThread.start();
     }
@@ -67,5 +71,37 @@ public class WorkerManager<W extends Worker> implements Runnable {
     // --- Getters ---
     public LinkedList<W> getWorkers() {
         return this.workers;
+    }
+
+    public synchronized int getWorkersFiredAmount() {
+        return this.totalWorkers - this.workers.size();
+    }
+
+    public synchronized int getBestWorker() {
+        int bestWorker = 0;
+        long minIdleTime = Constants.MAX_IDLE_TIME_BEFORE_FIRE;
+
+        for (W worker : this.workers) {
+            if (worker.getIdleTimeMs() < minIdleTime) {
+                bestWorker = worker.getId();
+                minIdleTime = worker.getIdleTimeMs();
+            }
+        }
+
+        return bestWorker;
+    }
+
+    public synchronized int getWorstWorker() {
+        int worstWorker = 0;
+        long maxIdleTime = 0;
+
+        for (W worker : this.workers) {
+            if (worker.getIdleTimeMs() > maxIdleTime) {
+                worstWorker = worker.getId();
+                maxIdleTime = worker.getIdleTimeMs();
+            }
+        }
+
+        return worstWorker;
     }
 }

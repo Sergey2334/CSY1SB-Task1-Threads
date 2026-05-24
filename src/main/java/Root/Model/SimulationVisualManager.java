@@ -6,6 +6,7 @@ import Root.View.SimulationArea.FarmersPanel.FarmersPanel;
 import Root.View.SimulationArea.WarehousePanel.WarehousePanel;
 
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class SimulationVisualManager implements Runnable {
     private FarmersPanel farmersPanel;
@@ -24,16 +25,24 @@ public class SimulationVisualManager implements Runnable {
         this.warehousePanel.setOrangesVisuals(orangesAmount);
     }
 
-    public void setFarmersWorkersVisuals(int farmersAmount) {
-        this.farmersPanel.setFarmersAmountVisuals(farmersAmount);
+    public void setFarmersWorkersVisuals(LinkedList<Worker> farmersList) {
+        this.farmersPanel.setFarmersVisuals(farmersList);
     }
 
-    public void setDriversWorkersVisuals(int driversAmount) {
-        this.driversPanel.setDriversAmountVisuals(driversAmount);
+    public void setDriversWorkersVisuals(LinkedList<Worker> driversList) {
+        this.driversPanel.setDriversVisuals(driversList);
     }
 
     public void setWarehouseStats(double orangesStoredPerSec, double orangesCollectedPerSec, int totalStored, int totalCollected, int currentCapacity, int totalCapacity) {
         this.warehousePanel.setOrangesStats(orangesStoredPerSec, orangesCollectedPerSec, totalStored, totalCollected, currentCapacity, totalCapacity);
+    }
+
+    public void setFarmersStats(int workersAmount, int workersFired, String bestWorker, String worstWorker) {
+        this.farmersPanel.setFarmersStats(workersAmount, workersFired, bestWorker, worstWorker);
+    }
+
+    public void setDriversStats(int workersAmount, int workersFired, String bestWorker, String worstWorker) {
+        this.driversPanel.setDriversStats(workersAmount, workersFired, bestWorker, worstWorker);
     }
 
     @Override

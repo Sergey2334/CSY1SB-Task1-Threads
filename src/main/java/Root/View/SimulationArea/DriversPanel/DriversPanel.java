@@ -1,9 +1,11 @@
 package Root.View.SimulationArea.DriversPanel;
 
+import Root.Model.Worker;
 import Root.View.ViewUtills.ViewUtills;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class DriversPanel extends JPanel {
     private DriversVisuals driversVisuals;
@@ -27,8 +29,11 @@ public class DriversPanel extends JPanel {
         this.add(this.driversStats, "grow x, grow y, push x, push y");
     }
 
-    public void setDriversAmountVisuals(int driversAmount)
-    {
-        this.driversVisuals.setDriversAmountVisuals(driversAmount);
+    public void setDriversVisuals(LinkedList<Worker> driversList) {
+        this.driversVisuals.setDriversVisuals(driversList);
+    }
+
+    public void setDriversStats(int workersAmount, int workersFired, String bestWorker, String worstWorker) {
+        this.driversStats.setStats(workersAmount, workersFired, bestWorker, worstWorker);
     }
 }

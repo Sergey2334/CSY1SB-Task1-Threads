@@ -32,6 +32,7 @@ public class WarehouseStorage extends JPanel {
         this.storageProgressBar.setOrientation(FlatProgressBar.VERTICAL);
         this.storageProgressBar.setForeground(new Color(0, 0, 0, 0));
         this.storageProgressBar.setForeground(new Color(255, 137, 0, 157));
+//        this.storageProgressBar.setForeground(Constants.ORANGE_COLOR.darker());
         this.storageProgressBar.setOpaque(false);
         this.add(this.storageProgressBar, "push x, push y, grow y, align right");
     }

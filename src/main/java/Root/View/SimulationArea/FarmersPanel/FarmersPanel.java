@@ -1,9 +1,11 @@
 package Root.View.SimulationArea.FarmersPanel;
 
+import Root.Model.Worker;
 import Root.View.ViewUtills.ViewUtills;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class FarmersPanel extends JPanel {
     private FarmersVisuals farmersVisuals;
@@ -27,7 +29,11 @@ public class FarmersPanel extends JPanel {
         this.add(this.farmersStats, "grow x, grow y, push x, push y");
     }
 
-    public void setFarmersAmountVisuals(int farmersAmount) {
-        this.farmersVisuals.setFarmersAmountVisuals(farmersAmount);
+    public void setFarmersVisuals(LinkedList<Worker> farmersList) {
+        this.farmersVisuals.setFarmersVisuals(farmersList);
+    }
+
+    public void setFarmersStats(int workersAmount, int workersFired, String bestWorker, String worstWorker) {
+        this.farmersStats.setStats(workersAmount, workersFired, bestWorker, worstWorker);
     }
 }

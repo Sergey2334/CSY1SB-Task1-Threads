@@ -1,14 +1,15 @@
 package Root.View.SimulationArea.FarmersPanel;
 
 import Root.Core.Constants;
+import Root.Model.Worker;
 import Root.View.ViewUtills.ViewUtills;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
+import java.util.LinkedList;
 
 public class FarmersVisuals extends JPanel {
-    private int farmersAmount = 0;
+    private LinkedList<Worker> farmersList = new LinkedList<Worker>();
 
     public FarmersVisuals() {
         this.initialize();
@@ -18,13 +19,13 @@ public class FarmersVisuals extends JPanel {
         this.setBorder(ViewUtills.createCustomTitledBorder("Farmers Visuals", true));
     }
 
-    public void setFarmersAmountVisuals(int farmersAmount) {
-        this.farmersAmount = farmersAmount;
+    public void setFarmersVisuals(LinkedList<Worker> farmersList) {
+        this.farmersList = farmersList;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ViewUtills.drawWorker(g, this, this.farmersAmount, Constants.FARMER_COLOR);
+        ViewUtills.drawWorker(g, this, this.farmersList, Constants.FARMER_COLOR);
     }
 }

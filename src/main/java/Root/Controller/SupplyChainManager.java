@@ -3,6 +3,8 @@ package Root.Controller;
 import Root.Model.*;
 import Root.Model.SimulationVisualManager;
 
+import java.util.LinkedList;
+
 public class SupplyChainManager implements Runnable {
     private WarehouseManager warehouseManager;
     private WorkerManager farmersManager;
@@ -29,22 +31,9 @@ public class SupplyChainManager implements Runnable {
     }
 
     private void update() {
-        int farmerAmount = this.farmersManager.getWorkers().size();
-        int orangesAmount = this.warehouse.getCurrentCapacity();
-        int driverAmount = this.driversManager.getWorkers().size();
-
-        double orangesStoredPerSecond = this.warehouseManager.getOrangesStoredPerSecond();
-        double orangesCollectedPerSecond = this.warehouseManager.getOrangesCollectedPerSecond();
-        int totalOrangesStored = this.warehouseManager.getTotalOrangesStored();
-        int totalOrangesCollected = this.warehouseManager.getTotalOrangesCollected();
-        int currentCapacity = this.warehouse.getCurrentCapacity();
-        int maxCapacity = this.warehouse.getTotalCapacity();
-
-        this.simulationVisualManager.setFarmersWorkersVisuals(farmerAmount);
-        this.simulationVisualManager.setWarehouseOrangesVisuals(orangesAmount);
-        this.simulationVisualManager.setDriversWorkersVisuals(driverAmount);
-
-        this.simulationVisualManager.setWarehouseStats(orangesStoredPerSecond, orangesCollectedPerSecond, totalOrangesStored, totalOrangesCollected, currentCapacity, maxCapacity);
+        this.updateWarehouseVisuals();
+        this.updateFarmersVisuals();
+        this.updateDriversVisuals();
     }
 
     @Override
@@ -89,5 +78,40 @@ public class SupplyChainManager implements Runnable {
 
     public WorkerManager<Driver> getDriversManager() {
         return this.driversManager;
+    }
+
+    // --- Helpers ---
+    private void updateFarmersVisuals() {
+        LinkedList<Worker> farmersList = this.farmersManager.getWorkers();
+        int farmersFiredAmount = this.farmersManager.getWorkersFiredAmount();
+        int bestFarmer = this.farmersManager.getBestWorker();
+        int worstFarmer = this.farmersManager.getWorstWorker();
+
+        this.simulationVisualManager.setFarmersWorkersVisuals(farmersList);
+        this.simulationVisualManager.setFarmersStats(farmersList.size(), farmersFiredAmount, bestFarmer + "", worstFarmer + "");
+    }
+
+    private void updateDriversVisuals() {
+        LinkedList driversList = this.driversManager.getWorkers();
+        int driversFiredAmount = this.driversManager.getWorkersFiredAmount();
+        int bestDriver = this.driversManager.getBestWorker();
+        int worstDriver = this.driversManager.getWorstWorker();
+
+        this.simulationVisualManager.setDriversWorkersVisuals(driversList);
+        this.simulationVisualManager.setDriversStats(driversList.size(), driversFiredAmount, bestDriver + "", worstDriver + "");
+    }
+
+    private void updateWarehouseVisuals() {
+        int orangesAmount = this.warehouse.getCurrentCapacity();
+
+        double orangesStoredPerSecond = this.warehouseManager.getOrangesStoredPerSecond();
+        double orangesCollectedPerSecond = this.warehouseManager.getOrangesCollectedPerSecond();
+        int totalOrangesStored = this.warehouseManager.getTotalOrangesStored();
+        int totalOrangesCollected = this.warehouseManager.getTotalOrangesCollected();
+        int currentCapacity = this.warehouse.getCurrentCapacity();
+        int maxCapacity = this.warehouse.getTotalCapacity();
+
+        this.simulationVisualManager.setWarehouseOrangesVisuals(orangesAmount);
+        this.simulationVisualManager.setWarehouseStats(orangesStoredPerSecond, orangesCollectedPerSecond, totalOrangesStored, totalOrangesCollected, currentCapacity, maxCapacity);
     }
 }
