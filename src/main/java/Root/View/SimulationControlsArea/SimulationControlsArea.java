@@ -1,15 +1,12 @@
 package Root.View.SimulationControlsArea;
 
-import Root.Core.Constants;
 import Root.View.SimulationControlsArea.AddSubResetArea.AddSubResetPanel;
 import Root.View.SimulationControlsArea.SlidersArea.SliderPanel;
 import Root.View.SimulationControlsArea.StartPauseResumeArea.StartPauseResumePanel;
-import Root.View.ViewUtills.ViewUtills;
-import com.formdev.flatlaf.ui.FlatLineBorder;
+import Root.View.ViewUtills.ViewUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SimulationControlsArea extends JPanel {
     private SliderPanel sliderPanel;
@@ -35,7 +32,7 @@ public class SimulationControlsArea extends JPanel {
     }
 
     private void initializeComponents() {
-        this.setBorder(ViewUtills.createCustomTitledBorder("SIMULATION CONTROLS", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("SIMULATION CONTROLS", true));
 
         this.sliderPanel = new SliderPanel();
         this.addSubResetPanel = new AddSubResetPanel();

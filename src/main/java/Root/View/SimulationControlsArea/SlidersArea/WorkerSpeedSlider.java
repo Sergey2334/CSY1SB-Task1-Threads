@@ -1,12 +1,9 @@
 package Root.View.SimulationControlsArea.SlidersArea;
 
-import Root.Core.Constants;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 import com.formdev.flatlaf.extras.components.FlatSlider;
-import com.formdev.flatlaf.ui.FlatLineBorder;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 
 public class WorkerSpeedSlider extends JPanel {
@@ -27,7 +24,7 @@ public class WorkerSpeedSlider extends JPanel {
         f.setSnapToTicks(true);
         f.setCursor(new Cursor(Cursor.HAND_CURSOR));
         f.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        f.setBorder(ViewUtills.createCustomTitledBorder(workerSpeed, false));
+        f.setBorder(ViewUtils.createCustomTitledBorder(workerSpeed, false));
 
         this.add(f);
     }

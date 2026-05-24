@@ -2,7 +2,7 @@ package Root.View.SimulationArea.FarmersPanel;
 
 import Root.Core.Constants;
 import Root.Model.Worker;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class FarmersVisuals extends JPanel {
     }
 
     private void initialize() {
-        this.setBorder(ViewUtills.createCustomTitledBorder("Farmers Visuals", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("Farmers Visuals", true));
     }
 
     public void setFarmersVisuals(LinkedList<Worker> farmersList) {
@@ -26,6 +26,6 @@ public class FarmersVisuals extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ViewUtills.drawWorker(g, this, this.farmersList, Constants.FARMER_COLOR);
+        ViewUtils.drawWorker(g, this, this.farmersList, Constants.FARMER_COLOR);
     }
 }

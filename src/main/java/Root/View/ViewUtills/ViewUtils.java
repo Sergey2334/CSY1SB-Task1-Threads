@@ -10,8 +10,8 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 
-public final class ViewUtills {
-    private ViewUtills() {
+public final class ViewUtils {
+    private ViewUtils() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
@@ -169,6 +169,7 @@ public final class ViewUtills {
             g2d.rotate(Math.toRadians(45));
 
 
+            // Working/Idle Color
             if (!worker.getIsIdle()) {
                 g2d.setColor(workerColor);
             } else {

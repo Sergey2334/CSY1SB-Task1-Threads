@@ -1,7 +1,7 @@
 package Root.View.SimulationArea.WarehousePanel;
 
 import Root.Core.Constants;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class WarehouseStats extends JPanel {
 
     private void initialize() {
         this.setLayout(new MigLayout("wrap 1, fill"));
-        this.setBorder(ViewUtills.createCustomTitledBorder("Stats", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("Stats", true));
     }
 
     private void initializeComponents() {

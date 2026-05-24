@@ -8,7 +8,7 @@ public final class Constants {
     }
 
     public static final int WAREHOUSE_START_MAX_CAPACITY = 10;
-    public static final int WORKERS_AMOUNT_START = 500;
+    public static final int WORKERS_AMOUNT_START = 5;
 
     public static final int FARMER_MIN_PICKING_TIME = 1 * 1000;
     public static final int FARMER_MAX_PICKING_TIME = 3 * 1000;

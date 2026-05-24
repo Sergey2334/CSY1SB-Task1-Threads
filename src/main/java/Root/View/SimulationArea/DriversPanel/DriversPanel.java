@@ -1,7 +1,7 @@
 package Root.View.SimulationArea.DriversPanel;
 
 import Root.Model.Worker;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class DriversPanel extends JPanel {
 
     private void initialize() {
         this.setLayout(new MigLayout("wrap 1"));
-        this.setBorder(ViewUtills.createCustomTitledBorder("Drivers Panel", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("Drivers Panel", true));
     }
 
     private void initializeComponents() {

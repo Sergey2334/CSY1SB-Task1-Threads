@@ -1,7 +1,7 @@
 package Root.View.SimulationArea.FarmersPanel;
 
 import Root.Model.Worker;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class FarmersPanel extends JPanel {
 
     private void initialize() {
         this.setLayout(new MigLayout("wrap 1"));
-        this.setBorder(ViewUtills.createCustomTitledBorder("Faarmers Panel", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("Faarmers Panel", true));
     }
 
     private void initializeComponents() {

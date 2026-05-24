@@ -2,7 +2,7 @@ package Root.View.SimulationArea.DriversPanel;
 
 import Root.Core.Constants;
 import Root.Model.Worker;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class DriversVisuals extends JPanel {
     }
 
     private void initialize() {
-        this.setBorder(ViewUtills.createCustomTitledBorder("Drivers Visuals", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("Drivers Visuals", true));
     }
 
     public void setDriversVisuals(LinkedList<Worker> driversList) {
@@ -26,6 +26,6 @@ public class DriversVisuals extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        ViewUtills.drawWorker(g, this, this.driversList, Constants.DRIVER_COLOR);
+        ViewUtils.drawWorker(g, this, this.driversList, Constants.DRIVER_COLOR);
     }
 }

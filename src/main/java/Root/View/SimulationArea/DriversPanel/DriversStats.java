@@ -1,13 +1,11 @@
 package Root.View.SimulationArea.DriversPanel;
 
 import Root.Core.Constants;
-import Root.Model.Worker;
-import Root.View.ViewUtills.ViewUtills;
+import Root.View.ViewUtills.ViewUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
 
 public class DriversStats extends JPanel {
     private JLabel workersAmount;
@@ -22,7 +20,7 @@ public class DriversStats extends JPanel {
 
     private void initialize() {
         this.setLayout(new MigLayout("wrap 1, fill"));
-        this.setBorder(ViewUtills.createCustomTitledBorder("Driver Stats", true));
+        this.setBorder(ViewUtils.createCustomTitledBorder("Driver Stats", true));
     }
 
     private void initializeComponents() {
