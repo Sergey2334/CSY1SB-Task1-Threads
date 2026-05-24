@@ -109,7 +109,7 @@ public abstract class Worker implements Runnable {
         return this.isIdle;
     }
 
-    public int getId() {
+    public synchronized int getId() {
         return this.id;
     }
 
