@@ -33,9 +33,18 @@ public class SupplyChainManager implements Runnable {
         int orangesAmount = this.warehouse.getCurrentCapacity();
         int driverAmount = this.driversManager.getWorkers().size();
 
-        this.simulationVisualManager.setFarmersWorkers(farmerAmount);
-        this.simulationVisualManager.setWarehouseOranges(orangesAmount);
-        this.simulationVisualManager.setDriversWorkers(driverAmount);
+        double orangesStoredPerSecond = this.warehouseManager.getOrangesStoredPerSecond();
+        double orangesCollectedPerSecond = this.warehouseManager.getOrangesCollectedPerSecond();
+        int totalOrangesStored = this.warehouseManager.getTotalOrangesStored();
+        int totalOrangesCollected = this.warehouseManager.getTotalOrangesCollected();
+        int currentCapacity = this.warehouse.getCurrentCapacity();
+        int maxCapacity = this.warehouse.getTotalCapacity();
+
+        this.simulationVisualManager.setFarmersWorkersVisuals(farmerAmount);
+        this.simulationVisualManager.setWarehouseOrangesVisuals(orangesAmount);
+        this.simulationVisualManager.setDriversWorkersVisuals(driverAmount);
+
+        this.simulationVisualManager.setWarehouseStats(orangesStoredPerSecond, orangesCollectedPerSecond, totalOrangesStored, totalOrangesCollected, currentCapacity, maxCapacity);
     }
 
     @Override
@@ -51,7 +60,7 @@ public class SupplyChainManager implements Runnable {
         driversThread.start();
         simulationVisualsThread.start();
 
-        while ((farmersThread.isAlive()) && (driversThread.isAlive())) {
+        while (true) {
             this.update();
 
 //            MyUtils.sleep(2 * 1000); // Check status every 2 seconds

@@ -20,19 +20,20 @@ public class SimulationVisualManager implements Runnable {
         this.driversPanel = driversPanel;
     }
 
-    public void setWarehouseOranges(int orangesAmount)
-    {
-        this.warehousePanel.setOrangesAmount(orangesAmount);
+    public void setWarehouseOrangesVisuals(int orangesAmount) {
+        this.warehousePanel.setOrangesVisuals(orangesAmount);
     }
 
-    public void setFarmersWorkers(int farmersAmount)
-    {
-        this.farmersPanel.setFarmersAmount(farmersAmount);
+    public void setFarmersWorkersVisuals(int farmersAmount) {
+        this.farmersPanel.setFarmersAmountVisuals(farmersAmount);
     }
 
-    public void setDriversWorkers(int driversAmount)
-    {
-        this.driversPanel.setDriversAmount(driversAmount);
+    public void setDriversWorkersVisuals(int driversAmount) {
+        this.driversPanel.setDriversAmountVisuals(driversAmount);
+    }
+
+    public void setWarehouseStats(double orangesStoredPerSec, double orangesCollectedPerSec, int totalStored, int totalCollected, int currentCapacity, int totalCapacity) {
+        this.warehousePanel.setOrangesStats(orangesStoredPerSec, orangesCollectedPerSec, totalStored, totalCollected, currentCapacity, totalCapacity);
     }
 
     @Override

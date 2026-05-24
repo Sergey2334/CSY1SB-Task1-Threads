@@ -43,49 +43,7 @@ public class WarehouseStorage extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // 1. Setup layout constraints
-        int orangeSize = 10;        // Diameter of each orange
-        int spacing = 4;           // Space between oranges
-        int leftMargin = 15;       // Push away from the left border
-        int topMargin = 30;        // Push down past the title border text
-        int rightMargin = 15;      // Stop before hitting the right border
-
-        // 2. Calculate dynamic row capacity based on current panel width
-        int availableWidth = this.getWidth() - leftMargin - rightMargin;
-        int stepSize = orangeSize + spacing;
-        int maxPerRow = availableWidth / stepSize;
-
-        // Prevent division by zero if the panel is minimized very small
-        if (maxPerRow <= 0) {
-            maxPerRow = 1;
-        }
-
-//        g2d.setColor(Color.ORANGE);
+        ViewUtills.drawOranges(g, this, this.orangesAmount, Constants.ORANGE_COLOR);
         this.storageProgressBar.setValue(orangesAmount);
-
-        // 3. Draw rows dynamically based on calculated maxPerRow
-        for (int i = 0; i < this.orangesAmount; i++) {
-            int column = i % maxPerRow;
-            int row = i / maxPerRow;
-
-            int x = leftMargin + (column * stepSize);
-            int y = topMargin + (row * stepSize);
-
-            Color haloColor = new Color(0, 0, 0, 69);
-            g2d.setColor(haloColor);
-
-            int haloSize = orangeSize + 4; // Makes the halo 4 pixels bigger than the orange
-            g2d.fillOval(x - 2, y - 2, haloSize, haloSize);
-
-            g2d.setColor(new Color(255, 232, 214, 200));
-            g2d.drawOval(x, y, orangeSize, orangeSize);
-
-            g2d.setColor(Color.ORANGE);
-            g2d.fillOval(x, y, orangeSize, orangeSize);
-        }
     }
 }

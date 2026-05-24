@@ -38,6 +38,10 @@ public class Warehouse {
         return this.currentCapacity;
     }
 
+    public int getTotalCapacity() {
+        return this.totalCapacity;
+    }
+
     public void add() {
         this.currentCapacity++;
     }

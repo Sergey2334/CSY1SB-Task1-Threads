@@ -1,7 +1,5 @@
 package Root.View.SimulationArea.DriversPanel;
 
-import Root.View.SimulationArea.WarehousePanel.WarehouseStats;
-import Root.View.SimulationArea.WarehousePanel.WarehouseStorage;
 import Root.View.ViewUtills.ViewUtills;
 import net.miginfocom.swing.MigLayout;
 
@@ -29,8 +27,8 @@ public class DriversPanel extends JPanel {
         this.add(this.driversStats, "grow x, grow y, push x, push y");
     }
 
-    public void setDriversAmount(int driversAmount)
+    public void setDriversAmountVisuals(int driversAmount)
     {
-        this.driversVisuals.setDriversAmount(driversAmount);
+        this.driversVisuals.setDriversAmountVisuals(driversAmount);
     }
 }

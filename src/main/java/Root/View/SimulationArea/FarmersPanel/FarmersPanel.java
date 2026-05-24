@@ -27,7 +27,7 @@ public class FarmersPanel extends JPanel {
         this.add(this.farmersStats, "grow x, grow y, push x, push y");
     }
 
-    public void setFarmersAmount(int farmersAmount) {
-        this.farmersVisuals.setFarmersAmount(farmersAmount);
+    public void setFarmersAmountVisuals(int farmersAmount) {
+        this.farmersVisuals.setFarmersAmountVisuals(farmersAmount);
     }
 }

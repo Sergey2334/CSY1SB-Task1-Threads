@@ -27,7 +27,11 @@ public class WarehousePanel extends JPanel {
         this.add(this.warehouseStats, "grow x, grow y, push x, push y");
     }
 
-    public void setOrangesAmount(int orangesAmount) {
+    public void setOrangesVisuals(int orangesAmount) {
         this.warehouseStorage.setOrangesAmount(orangesAmount);
+    }
+
+    public void setOrangesStats(double orangesStoredPerSec, double orangesCollectedPerSec, int totalStored, int totalCollected, int currentCapacity, int totalCapacity) {
+        this.warehouseStats.setStats(orangesStoredPerSec, orangesCollectedPerSec, totalStored, totalCollected, currentCapacity, totalCapacity);
     }
 }
