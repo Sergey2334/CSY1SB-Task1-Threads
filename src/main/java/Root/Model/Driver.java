@@ -14,7 +14,7 @@ public class Driver extends Worker {
     }
 
     public Driver(WarehouseManager warehouseManager) {
-        super(nextId(), warehouseManager);
+        super(nextId(), warehouseManager, Constants.DRIVER_MIN_DRIVE_TIME, Constants.DRIVER_MAX_DRIVE_TIME);
         this.drivesCount = 0;
         this.orangesCollected = 0;
     }
@@ -24,16 +24,19 @@ public class Driver extends Worker {
         this.captureExecutionThread(); // Must be first!
 
         while (this.getIsWorking() && !Thread.currentThread().isInterrupted()) {
+            while (!this.getIsPaused())
+            {
+                this.roleWork();
+                this.drivesCount++;
 
-            this.roleWork(Constants.DRIVER_MIN_DRIVE_TIME, Constants.DRIVER_MAX_DRIVE_TIME);
-            this.drivesCount++;
+                if (Thread.currentThread().isInterrupted()) {
+                    break;
+                }
 
-            if (Thread.currentThread().isInterrupted()) {
-                break;
+                this.warehouseWork(() -> this.getWarehouseManager().remove());
+                this.orangesCollected++;
             }
 
-            this.warehouseWork(() -> this.getWarehouseManager().remove());
-            this.orangesCollected++;
         }
     }
 

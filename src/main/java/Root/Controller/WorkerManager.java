@@ -14,28 +14,42 @@ public class WorkerManager<W extends Worker> implements Runnable {
 
     private int totalWorkers = 0;
 
+    private boolean isPaused;
+
     public WorkerManager(WarehouseManager warehouseManager, WorkerFactory<W> factory) {
         this.warehouseManager = warehouseManager;
         this.factory = factory;
+
+        this.isPaused = false;
     }
 
     @Override
     public void run() {
         this.initializeWorkers();
 
-        while (!this.workers.isEmpty()) {
-            MyUtils.sleep(2 * 1000); // Gives the CPU some time to Breathe
+        while (!this.workers.isEmpty() ) {
+            while(!this.isPaused)
+            {
+                MyUtils.sleep(2 * 1000); // Gives the CPU some time to Breathe
 
-            synchronized (this) {
-                for (int i = this.workers.size() - 1; i >= 0; i--) {
-                    W worker = this.workers.get(i);
-                    if (worker.getIdleTimeMs() >= Constants.MAX_IDLE_TIME_BEFORE_FIRE) {
-                        worker.fire();
-                        this.workers.remove(i);
+                synchronized (this) {
+                    for (int i = this.workers.size() - 1; i >= 0; i--) {
+                        W worker = this.workers.get(i);
+                        if (worker.getIdleTimeMs() >= Constants.MAX_IDLE_TIME_BEFORE_FIRE) {
+                            worker.fire();
+                            this.workers.remove(i);
+                        }
                     }
                 }
             }
         }
+    }
+
+    public void togglePause() {
+        for (W worker : this.workers) {
+            worker.togglePaused();
+        }
+        this.isPaused = !this.isPaused;
     }
 
     private void initializeWorkers() {
@@ -59,6 +73,24 @@ public class WorkerManager<W extends Worker> implements Runnable {
         if (this.workers.contains(worker)) {
             worker.fire();
             this.workers.remove(worker);
+        }
+    }
+
+    public void removeFirstWorker() {
+        if (!this.workers.isEmpty()) {
+            this.removeWorker(this.workers.getFirst());
+        }
+    }
+
+    public void setWorkersSpeedMultiplier(int value) {
+        if (this.workers.isEmpty()) {
+            return;
+        }
+        synchronized (this) {
+            for (W worker : this.workers) {
+                worker.setMinWorkTime(worker.getInitialMinWorkTime() / Math.max(value, 1));
+                worker.setMaxWorkTime(worker.getInitialMaxWorkTime() / Math.max(value, 1));
+            }
         }
     }
 

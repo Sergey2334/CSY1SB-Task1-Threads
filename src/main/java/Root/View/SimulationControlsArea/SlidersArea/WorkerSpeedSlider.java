@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class WorkerSpeedSlider extends JPanel {
+    private FlatSlider workerSpeedSlider;
+
     public WorkerSpeedSlider(String worker) {
         this.initialize(worker);
     }
@@ -14,19 +16,23 @@ public class WorkerSpeedSlider extends JPanel {
     private void initialize(String worker) {
         String workerSpeed = worker + " Speed";
 
-        FlatSlider f = new FlatSlider();
-        f.setMinimum(0);
-        f.setMaximum(100);
-        f.setMajorTickSpacing(10);
-        f.setMinorTickSpacing(5);
-        f.setPaintTicks(true);
-        f.setPaintLabels(true);
-        f.setSnapToTicks(true);
-        f.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        f.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        f.setBorder(ViewUtils.createCustomTitledBorder(workerSpeed, false));
+        this.workerSpeedSlider = new FlatSlider();
+        this.workerSpeedSlider.setMinimum(1);
+        this.workerSpeedSlider.setMaximum(5);
+        this.workerSpeedSlider.setMajorTickSpacing(2);
+        this.workerSpeedSlider.setMinorTickSpacing(1);
+        this.workerSpeedSlider.setValue(1);
+        this.workerSpeedSlider.setPaintTicks(true);
+        this.workerSpeedSlider.setPaintLabels(true);
+        this.workerSpeedSlider.setSnapToTicks(true);
+        this.workerSpeedSlider.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.workerSpeedSlider.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.workerSpeedSlider.setBorder(ViewUtils.createCustomTitledBorder(workerSpeed, false));
 
-        this.add(f);
+        this.add(this.workerSpeedSlider);
     }
 
+    public FlatSlider getWorkerSpeedSlider() {
+        return this.workerSpeedSlider;
+    }
 }

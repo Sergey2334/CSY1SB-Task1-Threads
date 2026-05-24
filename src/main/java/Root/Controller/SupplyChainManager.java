@@ -1,5 +1,7 @@
 package Root.Controller;
 
+import Root.Core.Constants;
+import Root.Core.MyUtils;
 import Root.Model.*;
 import Root.Model.SimulationVisualManager;
 
@@ -9,11 +11,16 @@ public class SupplyChainManager implements Runnable {
     private WarehouseManager warehouseManager;
     private WorkerManager farmersManager;
     private WorkerManager driversManager;
+    private boolean isStarted;
+    private boolean isPaused;
 
     private Warehouse warehouse = new Warehouse();
     private SimulationVisualManager simulationVisualManager;
 
     public SupplyChainManager(SimulationVisualManager simulationVisualManager) {
+        this.isStarted = false;
+        this.isPaused = false;
+
         this.simulationVisualManager = simulationVisualManager;
         this.warehouseManager = new WarehouseManager(this.warehouse);
         /*
@@ -50,16 +57,14 @@ public class SupplyChainManager implements Runnable {
         simulationVisualsThread.start();
 
         while (true) {
+            if (!this.isStarted || this.isPaused) {
+                MyUtils.sleep(100);
+                continue;
+            }
             this.update();
 
-//            MyUtils.sleep(2 * 1000); // Check status every 2 seconds
-//            System.out.println("=== SYSTEM SNAPSHOT ===");
-//            System.out.println(this.warehouse);
-//            System.out.println("-----------------------");
-//            this.farmersManager.printWorkers();
-//            System.out.println();
-//            this.driversManager.printWorkers();
-//            System.out.println("=======================\n");
+            // Give's The CPU Some Time
+            MyUtils.sleep(10);
         }
     }
 
@@ -78,6 +83,75 @@ public class SupplyChainManager implements Runnable {
 
     public WorkerManager<Driver> getDriversManager() {
         return this.driversManager;
+    }
+
+    // --- Setters ===
+    // ADD_RESET_SUB Panel
+    public void addMaxCapacity() {
+        this.warehouse.setTotalCapacity(this.warehouse.getTotalCapacity() + 1);
+    }
+
+    public void resetCapacity() {
+        this.warehouse.setTotalCapacity(Constants.WAREHOUSE_START_MAX_CAPACITY);
+    }
+
+    public void subMaxCapacity() {
+        this.warehouse.setTotalCapacity(Math.max(this.warehouse.getTotalCapacity() - 1, 0));
+    }
+
+    // SLIDERS Panel
+    public void addFarmer() {
+        if (!this.isStarted || this.isPaused)
+        {
+            return;
+        }
+
+        this.farmersManager.addWorker();
+    }
+
+    public void addDriver() {
+        if (!this.isStarted || this.isPaused)
+        {
+            return;
+        }
+
+        this.driversManager.addWorker();
+    }
+
+    public void subFarmer() {
+        if (!this.isStarted || this.isPaused)
+        {
+            return;
+        }
+
+        this.farmersManager.removeFirstWorker();
+    }
+
+    public void subDriver() {
+        if (!this.isStarted || this.isPaused)
+        {
+            return;
+        }
+
+        this.driversManager.removeFirstWorker();
+    }
+
+    public void setFarmerSpeedMultiplier(int value) {
+        this.farmersManager.setWorkersSpeedMultiplier(value);
+    }
+
+    public void setDriverSpeedMultiplier(int value) {
+        this.driversManager.setWorkersSpeedMultiplier(value);
+    }
+
+    public void setStarted() {
+        this.isStarted = true;
+    }
+
+    public void togglePaused() {
+        this.farmersManager.togglePause();
+        this.driversManager.togglePause();
+        this.isPaused = !this.isPaused;
     }
 
     // --- Helpers ---
@@ -111,7 +185,7 @@ public class SupplyChainManager implements Runnable {
         int currentCapacity = this.warehouse.getCurrentCapacity();
         int maxCapacity = this.warehouse.getTotalCapacity();
 
-        this.simulationVisualManager.setWarehouseOrangesVisuals(orangesAmount);
+        this.simulationVisualManager.setWarehouseOrangesVisuals(orangesAmount, this.warehouse.getTotalCapacity());
         this.simulationVisualManager.setWarehouseStats(orangesStoredPerSecond, orangesCollectedPerSecond, totalOrangesStored, totalOrangesCollected, currentCapacity, maxCapacity);
     }
 }

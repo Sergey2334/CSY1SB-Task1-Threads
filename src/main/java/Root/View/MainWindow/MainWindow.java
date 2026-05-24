@@ -47,7 +47,7 @@ public class MainWindow extends JFrame {
 
     private void initializeComponents() {
         this.simulationArea = new SimulationArea();
-        this.simulationControlsArea = new SimulationControlsArea();
+        this.simulationControlsArea = new SimulationControlsArea(this.simulationArea.getSupplyChainManager());
 
         this.initializeImageIcon();
         this.add(new JSeparator(), BorderLayout.NORTH);

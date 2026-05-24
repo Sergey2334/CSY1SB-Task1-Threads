@@ -1,5 +1,6 @@
 package Root.Model;
 
+import Root.Core.Constants;
 import Root.Core.MyUtils;
 import Root.Core.WarehouseAction;
 
@@ -11,6 +12,12 @@ public abstract class Worker implements Runnable {
     private int warehouseWorkCount;
     private long workTimeSec;
 
+
+    private int initialMinWorkTime;
+    private int initialMaxWorkTime;
+    private int minWorkTime;
+    private int maxWorkTime;
+
     // Real Time idleTime Tracker
     private long accumulatedIdleTimeMs;
     private long currentWaitStartNs;
@@ -18,7 +25,9 @@ public abstract class Worker implements Runnable {
     private WarehouseManager warehouseManager;
     private Thread executionThread;
 
-    public Worker(int id, WarehouseManager warehouseManager) {
+    private boolean isPaused;
+
+    public Worker(int id, WarehouseManager warehouseManager, int minWorkTime, int maxWorkTime) {
         this.id = id;
         this.isWorking = true;
         this.isIdle = false;
@@ -26,10 +35,18 @@ public abstract class Worker implements Runnable {
         this.warehouseWorkCount = 0;
         this.workTimeSec = 0;
 
+        this.initialMinWorkTime = minWorkTime;
+        this.initialMaxWorkTime = maxWorkTime;
+
+        this.minWorkTime = minWorkTime;
+        this.maxWorkTime = maxWorkTime;
+
         this.accumulatedIdleTimeMs = 0;
         this.currentWaitStartNs = 0;
 
         this.warehouseManager = warehouseManager;
+
+        this.isPaused = false;
     }
 
     @Override
@@ -38,13 +55,17 @@ public abstract class Worker implements Runnable {
     @Override
     public abstract void run();
 
+    public void togglePaused() {
+        this.isPaused = !this.isPaused;
+    }
+
     protected final void captureExecutionThread() {
         this.executionThread = Thread.currentThread();
     }
 
     // Simulate Work
-    public void roleWork(int minWorkTime, int maxWorkTime) {
-        int workTime = MyUtils.getRandomNumber(minWorkTime, maxWorkTime);
+    public void roleWork() {
+        int workTime = MyUtils.getRandomNumber(this.minWorkTime, this.maxWorkTime);
         MyUtils.sleep(workTime);
 
         this.workTimeSec += (workTime / 1000);
@@ -96,6 +117,18 @@ public abstract class Worker implements Runnable {
         return this.isWorking;
     }
 
+    public int getInitialMinWorkTime() {
+        return this.initialMinWorkTime;
+    }
+
+    public int getInitialMaxWorkTime() {
+        return this.initialMaxWorkTime;
+    }
+
+    public boolean getIsPaused() {
+        return this.isPaused;
+    }
+
     // Gets Real Idle Time, And Not Waiting To Be Awake :D
     public synchronized long getIdleTimeMs() {
         if (this.currentWaitStartNs == 0) {
@@ -119,5 +152,22 @@ public abstract class Worker implements Runnable {
 
     protected WarehouseManager getWarehouseManager() {
         return this.warehouseManager;
+    }
+
+    // --- Setters ---
+    public void setInitialMinWorkTime(int initialMinWorkTime) {
+        this.initialMinWorkTime = initialMinWorkTime;
+    }
+
+    public void setInitialMaxWorkTime(int initialMaxWorkTime) {
+        this.initialMaxWorkTime = initialMaxWorkTime;
+    }
+
+    public void setMinWorkTime(int minWorkTime) {
+        this.minWorkTime = minWorkTime;
+    }
+
+    public void setMaxWorkTime(int maxWorkTime) {
+        this.maxWorkTime = maxWorkTime;
     }
 }

@@ -39,6 +39,9 @@ public class WarehouseStorage extends JPanel {
     public void setOrangesAmount(int orangesAmount) {
         this.orangesAmount = orangesAmount;
     }
+    public void setStorageMaxCapacity(int storageMaxCapacity) {
+        this.storageProgressBar.setMaximum(storageMaxCapacity);
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

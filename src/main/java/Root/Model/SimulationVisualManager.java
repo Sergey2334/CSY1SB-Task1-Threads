@@ -21,8 +21,8 @@ public class SimulationVisualManager implements Runnable {
         this.driversPanel = driversPanel;
     }
 
-    public void setWarehouseOrangesVisuals(int orangesAmount) {
-        this.warehousePanel.setOrangesVisuals(orangesAmount);
+    public void setWarehouseOrangesVisuals(int orangesAmount, int maxOrangesCapacity) {
+        this.warehousePanel.setOrangesVisuals(orangesAmount, maxOrangesCapacity);
     }
 
     public void setFarmersWorkersVisuals(LinkedList<Worker> farmersList) {

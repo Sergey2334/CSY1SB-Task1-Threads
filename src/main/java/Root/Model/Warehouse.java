@@ -26,20 +26,28 @@ public class Warehouse {
         return "Warehouse: CurrentCapacity: " + progressBar + this.currentCapacity + "/" + this.totalCapacity;
     }
 
-    public boolean getIsFull() {
+    public synchronized boolean getIsFull() {
         return this.currentCapacity == this.totalCapacity;
     }
 
-    public boolean getIsEmpty() {
+    public synchronized boolean getIsEmpty() {
         return this.currentCapacity == 0;
     }
 
-    public int getCurrentCapacity() {
+    public synchronized int getCurrentCapacity() {
         return this.currentCapacity;
     }
 
-    public int getTotalCapacity() {
+    public synchronized int getTotalCapacity() {
         return this.totalCapacity;
+    }
+
+    public synchronized void setTotalCapacity(int totalCapacity) {
+        this.totalCapacity = totalCapacity;
+        if (this.currentCapacity >= this.totalCapacity)
+        {
+            this.currentCapacity = this.totalCapacity;
+        }
     }
 
     public void add() {

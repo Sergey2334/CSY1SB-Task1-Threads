@@ -31,7 +31,7 @@ public class SimulationArea extends JPanel {
         String columnConstraints = "[35%, fill, grow][30%, fill, grow][35%, fill, grow]";
 
         // 3. Stretches the row vertically to fill the full height
-        String rowConstraints    = "[fill]";
+        String rowConstraints = "[fill]";
 
         this.setLayout(new MigLayout(layoutConstraints, columnConstraints, rowConstraints));
     }
@@ -51,5 +51,9 @@ public class SimulationArea extends JPanel {
         this.add(this.driversPanel);
 
         supplyChainThread.start();
+    }
+
+    public SupplyChainManager getSupplyChainManager() {
+        return this.supplyChainManager;
     }
 }

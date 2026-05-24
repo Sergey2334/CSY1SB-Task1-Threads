@@ -14,7 +14,7 @@ public class Farmer extends Worker {
     }
 
     public Farmer(WarehouseManager warehouseManager) {
-        super(nextId(), warehouseManager);
+        super(nextId(), warehouseManager, Constants.FARMER_MIN_PICKING_TIME, Constants.FARMER_MAX_PICKING_TIME);
         this.orangesPicked = 0;
         this.orangesStored = 0;
     }
@@ -25,15 +25,18 @@ public class Farmer extends Worker {
 
         while (this.getIsWorking() && !Thread.currentThread().isInterrupted()) {
 
-            this.roleWork(Constants.FARMER_MIN_PICKING_TIME, Constants.FARMER_MAX_PICKING_TIME);
-            this.orangesPicked++;
+            while (!this.getIsPaused())
+            {
+                this.roleWork();
+                this.orangesPicked++;
 
-            if (Thread.currentThread().isInterrupted()) {
-                break;
+                if (Thread.currentThread().isInterrupted()) {
+                    break;
+                }
+
+                this.warehouseWork(() -> this.getWarehouseManager().add());
+                this.orangesStored++;
             }
-
-            this.warehouseWork(() -> this.getWarehouseManager().add());
-            this.orangesStored++;
         }
     }
 

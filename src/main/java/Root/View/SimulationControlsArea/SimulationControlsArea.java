@@ -1,5 +1,7 @@
 package Root.View.SimulationControlsArea;
 
+import Root.Controller.SimulationControls;
+import Root.Controller.SupplyChainManager;
 import Root.View.SimulationControlsArea.AddSubResetArea.AddSubResetPanel;
 import Root.View.SimulationControlsArea.SlidersArea.SliderPanel;
 import Root.View.SimulationControlsArea.StartPauseResumeArea.StartPauseResumePanel;
@@ -13,9 +15,13 @@ public class SimulationControlsArea extends JPanel {
     private AddSubResetPanel addSubResetPanel;
     private StartPauseResumePanel startPauseResumePanel;
 
-    public SimulationControlsArea() {
+    private SimulationControls simulationControls;
+
+    public SimulationControlsArea(SupplyChainManager supplyChainManager) {
         this.initialize();
-        this.initializeComponents();
+        this.initializeComponents(supplyChainManager);
+
+        this.bindControls();
     }
 
     private void initialize() {
@@ -26,12 +32,12 @@ public class SimulationControlsArea extends JPanel {
         String columnConstraints = "[35%, align center, grow][30%, align center, grow][35%, align center, grow]";
 
         // 3. Stretches the row vertically to fill the full height
-        String rowConstraints    = "[align center]";
+        String rowConstraints = "[align center]";
 
         this.setLayout(new MigLayout(layoutConstraints, columnConstraints, rowConstraints));
     }
 
-    private void initializeComponents() {
+    private void initializeComponents(SupplyChainManager supplyChainManager) {
         this.setBorder(ViewUtils.createCustomTitledBorder("SIMULATION CONTROLS", true));
 
         this.sliderPanel = new SliderPanel();
@@ -41,5 +47,23 @@ public class SimulationControlsArea extends JPanel {
         this.add(this.sliderPanel);
         this.add(this.addSubResetPanel);
         this.add(this.startPauseResumePanel);
+
+        this.simulationControls = new SimulationControls(supplyChainManager);
+    }
+
+    private void bindControls() {
+        this.addSubResetPanel.addCapacity(this.simulationControls.getAddCapacityAction());
+        this.addSubResetPanel.resetCapacity(this.simulationControls.getResetCapacityAction());
+        this.addSubResetPanel.subCapacity(this.simulationControls.getSubResetAction());
+
+        this.sliderPanel.onFarmerSpeedChanged(this.simulationControls.getFarmerSpeedAction());
+        this.sliderPanel.addFarmer(this.simulationControls.getAddFarmerAction());
+        this.sliderPanel.subFarmer(this.simulationControls.getSubFarmerAction());
+        this.sliderPanel.onDriverSpeedChanged(this.simulationControls.getDriverSpeedAction());
+        this.sliderPanel.addDriver(this.simulationControls.getAddDriverAction());
+        this.sliderPanel.subDriver(this.simulationControls.getSubDriverAction());
+
+        this.startPauseResumePanel.start(this.simulationControls.getStartAction());
+        this.startPauseResumePanel.togglePause(this.simulationControls.getTogglePauseAction());
     }
 }
