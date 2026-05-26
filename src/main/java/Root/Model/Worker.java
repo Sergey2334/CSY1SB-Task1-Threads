@@ -12,7 +12,6 @@ public abstract class Worker implements Runnable {
     private int warehouseWorkCount;
     private long workTimeSec;
 
-
     private int initialMinWorkTime;
     private int initialMaxWorkTime;
     private int minWorkTime;
@@ -25,7 +24,8 @@ public abstract class Worker implements Runnable {
     private WarehouseManager warehouseManager;
     private Thread executionThread;
 
-    private boolean isPaused;
+    private final Object pauseLock = new Object();
+    private volatile boolean isPaused = false;
 
     public Worker(int id, WarehouseManager warehouseManager, int minWorkTime, int maxWorkTime) {
         this.id = id;
@@ -55,8 +55,27 @@ public abstract class Worker implements Runnable {
     @Override
     public abstract void run();
 
+    // Pause Logic
     public void togglePaused() {
-        this.isPaused = !this.isPaused;
+        synchronized (pauseLock) {
+            this.isPaused = !this.isPaused;
+            if (!this.isPaused) {
+                pauseLock.notifyAll(); // Wake up the worker when unpaused
+            }
+        }
+    }
+
+    protected final void checkPause() {
+        synchronized (pauseLock) {
+            while (this.isPaused && this.isWorking) {
+                try {
+                    pauseLock.wait(); // Putting the thread to sleep safely!
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    this.isWorking = false;
+                }
+            }
+        }
     }
 
     protected final void captureExecutionThread() {

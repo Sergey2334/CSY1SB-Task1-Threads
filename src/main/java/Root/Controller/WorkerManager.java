@@ -33,21 +33,24 @@ public class WorkerManager<W extends Worker> implements Runnable {
         this.initializeWorkers();
 
         while (!this.workers.isEmpty()) {
-            while (!this.isPaused) {
-                MyUtils.sleep(2 * 1000); // Gives the CPU some time to Breathe
+            MyUtils.sleep(2 * 1000); // Gives the CPU some time to Breathe
 
-                synchronized (this) {
-                    for (int i = this.workers.size() - 1; i >= 0; i--) {
-                        W worker = this.workers.get(i);
-                        if (worker.getIdleTimeMs() >= Constants.MAX_IDLE_TIME_BEFORE_FIRE) {
-                            worker.fire();
-                            this.workers.remove(i);
-                        }
+            if (this.isPaused) {
+                continue;
+            }
+
+            synchronized (this) {
+                for (int i = this.workers.size() - 1; i >= 0; i--) {
+                    W worker = this.workers.get(i);
+                    if (worker.getIdleTimeMs() >= Constants.MAX_IDLE_TIME_BEFORE_FIRE) {
+                        worker.fire();
+                        this.workers.remove(i);
                     }
                 }
             }
         }
     }
+
 
     public void start() {
         this.start = true;

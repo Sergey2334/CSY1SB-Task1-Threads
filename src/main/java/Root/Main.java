@@ -9,6 +9,7 @@ import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatSpacegrayIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTAtomOneDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTMaterialPalenightIJTheme;
 
 import javax.swing.*;
 
@@ -26,11 +27,10 @@ public class Main {
         FlatUIDefaultsInspector.install("ctrl shift alt Y");
 
 
+        // Different Main Window Colors :D
 //        FlatOneDarkIJTheme.setup();
 //        FlatMTAtomOneDarkIJTheme.setup();
-//        FlatMTMaterialPalenightIJTheme.setup();
 //        FlatNordIJTheme.setup();
-//        FlatSpacegrayIJTheme.setup();
 //        FlatDarkPurpleIJTheme.setup();
 //
         SwingUtilities.invokeLater(() -> {

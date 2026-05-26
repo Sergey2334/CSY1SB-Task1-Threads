@@ -2,6 +2,7 @@ package Root.View.SimulationControlsArea.StartPauseResumeArea;
 
 import Root.View.SimulationControlsArea.ControlsUtills.SimulationControlButton;
 import Root.View.ViewUtills.ViewUtils;
+import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -22,7 +23,11 @@ public class StartPauseResumePanel extends JPanel {
 
     private void initializeComponents() {
         this.startButton = new SimulationControlButton("START SIMULATION");
+        this.startButton.putClientProperty(FlatClientProperties.STYLE_CLASS, "start");
         this.togglePauseButton = new SimulationControlButton("TOGGLE PAUSE/RESUME");
+        this.togglePauseButton.setToolTipText("MAY CAUSE PROBLEMS WITH BIG NUMBERS ! ( Please Don't Try :) )");
+        this.togglePauseButton.putClientProperty(FlatClientProperties.STYLE_CLASS, "pause");
+
 
         this.add(this.startButton, "grow");
         this.add(this.togglePauseButton, "grow");

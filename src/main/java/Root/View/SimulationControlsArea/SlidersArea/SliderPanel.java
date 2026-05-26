@@ -1,6 +1,7 @@
 package Root.View.SimulationControlsArea.SlidersArea;
 
 import Root.View.SimulationControlsArea.ControlsUtills.SimulationControlButton;
+import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -27,11 +28,15 @@ public class SliderPanel extends JPanel {
     private void initializeComponents() {
         this.farmerSpeedSlider = new WorkerSpeedSlider("Framer");
         this.addFarmerButton = new SimulationControlButton("ADD Farmer");
+        this.addFarmerButton.putClientProperty(FlatClientProperties.STYLE_CLASS, "add");
         this.subFarmerButton = new SimulationControlButton("SUB Farmer");
+        this.subFarmerButton.putClientProperty(FlatClientProperties.STYLE_CLASS, "remove");
 
         this.driverSpeedSlider = new WorkerSpeedSlider("Driver");
         this.addDriverButton = new SimulationControlButton("ADD Driver");
+        this.addDriverButton.putClientProperty(FlatClientProperties.STYLE_CLASS, "add");
         this.subDriverButton = new SimulationControlButton("SUB Driver");
+        this.subDriverButton.putClientProperty(FlatClientProperties.STYLE_CLASS, "remove");
 
         this.add(this.farmerSpeedSlider);
         this.add(this.addFarmerButton);

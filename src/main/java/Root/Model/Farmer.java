@@ -24,19 +24,23 @@ public class Farmer extends Worker {
         this.captureExecutionThread(); // Must be first!
 
         while (this.getIsWorking() && !Thread.currentThread().isInterrupted()) {
+            // Thread safely blocks here at 0% CPU if paused
+            this.checkPause();
 
-            while (!this.getIsPaused())
-            {
-                this.roleWork();
-                this.orangesPicked++;
-
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
-                }
-
-                this.warehouseWork(() -> this.getWarehouseManager().add());
-                this.orangesStored++;
+            // Extra safety check in case we were interrupted or fired while waiting
+            if (!this.getIsWorking() || Thread.currentThread().isInterrupted()) {
+                break;
             }
+
+            this.roleWork();
+            this.orangesPicked++;
+
+            if (Thread.currentThread().isInterrupted()) {
+                break;
+            }
+
+            this.warehouseWork(() -> this.getWarehouseManager().add());
+            this.orangesStored++;
         }
     }
 

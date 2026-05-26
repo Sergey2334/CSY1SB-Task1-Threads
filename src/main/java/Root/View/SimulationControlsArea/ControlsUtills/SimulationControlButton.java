@@ -12,7 +12,7 @@ public class SimulationControlButton extends JButton {
 
     private void initialize(String text) {
         // FlatLaf
-        this.putClientProperty(FlatClientProperties.STYLE_CLASS, "neutral");
+        this.putClientProperty(FlatClientProperties.STYLE_CLASS, "primary");
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         this.setText(text);

@@ -149,6 +149,10 @@ public class SupplyChainManager implements Runnable {
     }
 
     public void togglePaused() {
+        if (!this.isStarted)
+        {
+            return;
+        }
         this.farmersManager.togglePause();
         this.driversManager.togglePause();
         this.isPaused = !this.isPaused;

@@ -24,19 +24,23 @@ public class Driver extends Worker {
         this.captureExecutionThread(); // Must be first!
 
         while (this.getIsWorking() && !Thread.currentThread().isInterrupted()) {
-            while (!this.getIsPaused())
-            {
-                this.roleWork();
-                this.drivesCount++;
+            // Thread safely blocks here at 0% CPU if paused
+            this.checkPause();
 
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
-                }
-
-                this.warehouseWork(() -> this.getWarehouseManager().remove());
-                this.orangesCollected++;
+            // Extra safety check in case we were interrupted or fired while waiting
+            if (!this.getIsWorking() || Thread.currentThread().isInterrupted()) {
+                break;
             }
 
+            this.roleWork();
+            this.drivesCount++;
+
+            if (Thread.currentThread().isInterrupted()) {
+                break;
+            }
+
+            this.warehouseWork(() -> this.getWarehouseManager().remove());
+            this.orangesCollected++;
         }
     }
 
