@@ -1,11 +1,11 @@
-<img src="README_Images/TronBanner.webp" alt="TRON: The Neon Grid" style="border-radius: 20px; margin-bottom: 1rem;">
+<a id="top"></a>
+<img src="readme-images/banner.png" alt="Producer Consumer Simulation" style="border-radius: 8px; margin-bottom: 1rem;">
 
-![Static Badge](https://img.shields.io/badge/Consumer_Producer_Simulation-Java_Swing-orange)
+![Static Badge](https://img.shields.io/badge/Producer_Consumer_Simulation-Java_Swing-orange)
 ![GitHub top language](https://img.shields.io/github/languages/top/Sergey2334/CSY1SB-Task1-Threads?label=Java&logo=openjdk&logoSize=auto&color=orange)
-![GitHub repo size](https://img.shields.io/github/repo-size/Sergey2334/CSY1SB-Task1-Threads?style=flat&label=Repo%20Size&color=orange)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Sergey2334/CSY1SB-Task1-Threads?display_timestamp=committer&logo=github&logoSize=auto&label=Last%20Commit&color=orange)
 
-# Consumer Producer Simulation 🍊
+# Producer Consumer Simulation 🍊
 
 ## 👋 Hello, World :D
 
@@ -38,17 +38,11 @@ To keep things stable, our synchronization logic acts as the mediator to ensure 
     * **Option B (The Quick Way):** Click the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;"><> Code ▾</kbd> button at the top right of this page and select **Download ZIP**, then extract the files.
 
 2. **Open the Project:**
-    * Launch your favorite IDE (IntelliJ IDEA, Eclipse, or NetBeans).
+    * Launch your favorite IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea/download/), [Eclipse](https://www.eclipse.org/downloads/), or [NetBeans](https://netbeans.apache.org/front/main/download/)).
     * Open or import the extracted project folder.
-
-   ![Static Badge](https://img.shields.io/badge/IntelliJ_IDEA---?logo=intellijidea&logoSize=auto&color=grey&link=https%3A%2F%2Fwww.jetbrains.com%2Fidea%2Fdownload%2F%3Fsection%3Dwindows)
-
-    <img alt="Static Badge" src="https://img.shields.io/badge/IntelliJ_IDEA---?logo=intellijidea&logoSize=auto&labelColor=grey&color=grey&link=https%3A%2F%2Fwww.jetbrains.com%2Fidea%2Fdownload%2F%3Fsection%3Dwindows">
-
-
+   
 3. **Initialize the App:**
     * Navigate to the `Root` folder and run the `Main` class to pull up the environment interface.
-
 ---
 
 ## 🕹️ Running the Simulation
@@ -287,6 +281,6 @@ This simulation was a fantastic learning experience. It taught us a lot about th
 ---
 <div align="right">
 
-[Back To Top ⬆️](#-hello-world-d)
+[Back To Top ⬆️](#top)
 
 </div>
