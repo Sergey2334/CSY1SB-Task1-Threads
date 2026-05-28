@@ -1,39 +1,68 @@
 <img src="README_Images/TronBanner.webp" alt="TRON: The Neon Grid" style="border-radius: 20px; margin-bottom: 1rem;">
 
-![Static Badge](https://img.shields.io/badge/TRON-Java_Swing-darkgreen)<space><space>
-![Static Badge](https://img.shields.io/badge/%E2%AD%90%20%E2%AD%90%20%E2%AD%90%20%E2%AD%90%20%E2%AD%90-darkgreen?style=flat&logo=star&label=Ratings&labelColor=grey&color=darkgreen&link=https%3A%2F%2Fwww.merriam-webster.com%2Fdictionary%2Fnot%2520really)<space><space>
-![Static Badge](https://img.shields.io/badge/10k-darkgreen?style=flat&logo=star&label=Daily%20Users&labelColor=grey&color=darkgreen&link=https%3A%2F%2Fwww.merriam-webster.com%2Fdictionary%2Fnot%2520really)
+![Static Badge](https://img.shields.io/badge/Consumer_Producer_Simulation-Java_Swing-orange)
+![GitHub top language](https://img.shields.io/github/languages/top/Sergey2334/CSY1SB-Task1-Threads?label=Java&logo=openjdk&logoSize=auto&color=orange)
+![GitHub repo size](https://img.shields.io/github/repo-size/Sergey2334/CSY1SB-Task1-Threads?style=flat&label=Repo%20Size&color=orange)
+![GitHub last commit](https://img.shields.io/github/last-commit/Sergey2334/CSY1SB-Task1-Threads?display_timestamp=committer&logo=github&logoSize=auto&label=Last%20Commit&color=orange)
 
 # Consumer Producer Simulation 🍊
 
-## Hello, World :D
-### 🔄 The Core Logic: Producer-Consumer Problem
+## 👋 Hello, World :D
 
-At its heart, this simulation is a practical implementation of the classic **Producer-Consumer multi-threading problem**.
+### 🧵 Producer-Consumer Problem
 
-In this system, threads must cooperate safely without breaking or losing data:
-*   **The Producers (Farmers):** These threads run in the background, harvesting 🍊 oranges and pushing them into the warehouse storage queue.
-*   **The Buffer (Warehouse):** This acts as the shared memory space. It has a strict capacity limit, meaning farmers must wait if it fills up, and drivers must wait if it is empty.
-*   **The Consumers (Drivers):** These threads continuously pull 🍊 oranges out of the warehouse to transport them away.
+At its heart, this simulation is a practical implementation of the classic **Producer-Consumer multi-threading problem**, framed within a digital orange supply chain.
 
-**Why this matters:** Without proper thread synchronization, the farmers and drivers would clash over the warehouse data at the exact same millisecond, causing data corruption, inventory miscounts, or application crashes.
+To prevent data corruption, our background threads are carefully synchronized to cooperate safely:
+*   **The Producers (Farmers):** Active background threads that harvest 🍊 oranges and push them into the warehouse storage.
+*   **The Buffer (Warehouse):** The shared memory space with strict capacity limits. If it fills up, farmers must patiently wait; if it empties, drivers have to wait for the next harvest.
+*   **The Consumers (Drivers):** Continuous threads responsible for pulling 🍊 oranges out of the warehouse to transport them away.
 
-To keep things stable and safe, this synchronization is handled directly within the supply chain management logic.
+**Why this matters:** Without proper thread synchronization, farmers and drivers would clash over the warehouse data at the exact same millisecond. This leads to classic race conditions, inventory miscounts, or immediate application crashes.
+
+To keep things stable, our synchronization logic acts as the mediator to ensure total safety across the shared supply chain.
 
 ---
 ## 🚀 Simulation Features
 *   **Warehouse Capacity:** Adjust the storage capacity up or down, or reset it back to default.
 *   **Worker Management:** Add or remove workers, and change their work speed with a slider.
-*   **Pause & Resume:** Freeze and continue the simulation logic. <small><kbd>WIP: Needs further testing</kbd></small>
+*   **Pause & Resume:** Freeze and continue the simulation logic. <small><kbd>WIP: Needs further testing <small>(Works on our machines 🙃)</small></kbd></small>
+
+---
+## ▶️ How To Start ?
+
+### 🛠️ Setup Steps
+
+1. **Get the Code:**
+    * **Option A (The Developer Way):** Copy the repository URL from the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;"><> Code ▾</kbd> button at the top right of this page, then clone it via your terminal: `git clone https://github.com/Sergey2334/CSY1SB-Task1-Threads`
+    * **Option B (The Quick Way):** Click the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;"><> Code ▾</kbd> button at the top right of this page and select **Download ZIP**, then extract the files.
+
+2. **Open the Project:**
+    * Launch your favorite IDE (IntelliJ IDEA, Eclipse, or NetBeans).
+    * Open or import the extracted project folder.
+
+   ![Static Badge](https://img.shields.io/badge/IntelliJ_IDEA---?logo=intellijidea&logoSize=auto&color=grey&link=https%3A%2F%2Fwww.jetbrains.com%2Fidea%2Fdownload%2F%3Fsection%3Dwindows)
+
+    <img alt="Static Badge" src="https://img.shields.io/badge/IntelliJ_IDEA---?logo=intellijidea&logoSize=auto&labelColor=grey&color=grey&link=https%3A%2F%2Fwww.jetbrains.com%2Fidea%2Fdownload%2F%3Fsection%3Dwindows">
+
+
+3. **Initialize the App:**
+    * Navigate to the `Root` folder and run the `Main` class to pull up the environment interface.
 
 ---
 
-## How to start?
-Simply run the application from <code>Main</code> and you'll arrive at the Simulation <br>
-press ![Static Badge](https://img.shields.io/badge/START_SIMULATION-cyan)<space><space> to start the Simulation
+## 🕹️ Running the Simulation
 
+To kick off the operational workflow, look for and press the button below in the application window:
 
-{Insert Simulation Picture Here}
+<kbd style="background-color: #00DD88; color: #ffffff; padding: 7px 14px; border: none; border-radius: 10px; font-weight: bold; font-size: 11px; letter-spacing: 1px;">
+START SIMULATION
+</kbd>
+
+*Once pressed, the multithreaded logistics loop will initialize immediately.*
+
+<img src="readme-images/launch.png" alt="Simulation Launch" style="border-radius: 8px; margin-bottom: 1rem;">
+<img src="readme-images/start.png" alt="Simulation Launch" style="border-radius: 8px; margin-bottom: 1rem;">
 
 ### 🖥️ UI Layout & Controls
 The interface is split into three simple columns, with the controls placed directly below their matching visual panels.
@@ -42,19 +71,43 @@ The interface is split into three simple columns, with the controls placed direc
 | :--- | :--- | :--- | :--- |
 | **Visuals & Stats** | • Worker status (active/idle)<br>• Live farmer stats | • Orange inventory flow<br>• Warehouse metrics | • Driver status (active/idle)<br>• Live driver stats |
 | **Available Controls** | • Population (+ / -)<br>• Speed adjustment sliders | • Capacity (+1 / -1)<br>• Reset capacity button | • Start simulation<br>• Pause / Resume toggle |
-
-
-<button style="background-color: green; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: hand;">
-    Hello
-</button>
-
-<kbd>Hello</kbd>
-
 ---
 ## How It Works ?
 
+### 🎮 The Supreme Orchestrator (`SupplyChainManager`)
 
----
+The `SupplyChainManager` acts as the system Controller, mapping user inputs directly to our execution pipelines.
+
+*   **Multi-Threaded Ignition:** When launched, this manager spins up four concurrent pipelines to drive the simulation:
+    ```java
+    Thread warehouseThread = new Thread(this.warehouseManager);
+    Thread farmersThread = new Thread(this.farmersManager);
+    Thread driversThread = new Thread(this.driversManager);
+    Thread simulationVisualsThread = new Thread(this.simulationVisualManager);
+    ```
+*   **The Core Problem Solver (`WarehouseManager`):** This is where the actual multi-threading problem is solved. Using `synchronized` blocks alongside `wait()` and `notifyAll()` ensures that threads cooperate efficiently without causing resource deadlocks:
+    ```java
+    public synchronized void add() throws InterruptedException {
+        while (this.warehouse.getIsFull()) {
+            wait(); // Farmer thread safely pauses at 0% CPU if full
+        }
+        this.warehouse.add();
+        this.orangesStored.incrementAndGet();
+        notifyAll(); // Wakes up waiting drivers safely
+    }
+
+    public synchronized void remove() throws InterruptedException {
+        while (this.warehouse.getIsEmpty()) {
+            wait(); // Driver thread safely pauses at 0% CPU if empty
+        }
+        this.warehouse.remove();
+        this.orangesCollected.incrementAndGet();
+        notifyAll(); // Wakes up waiting farmers safely
+    }
+    ```
+    
+*   **The `while` Loop Guard (Crucial Safety Feature):** Notice we use a `while` condition instead of a simple `if` block before calling `wait()`. This forces threads to re-verify the warehouse boundaries immediately after waking up. It effectively guards our program against data corruption caused by unexpected thread context switches or spurious wakeups. 
+*(Arguably the most critical piece of logic in the entire simulation. Special thanks to Aviya for the insight!)*
 
 ---
 ## Project Structure & Architecture
@@ -65,8 +118,6 @@ This project is built using the **MVC (Model-View-Controller) pattern**. Instead
 *   **Model (The Brains):** This is where all the data lives and the actual logic happens. It tracks the simulation state, manages the workers, and knows what's going on behind the scenes—completely independent of how things look on screen.
 *   **View (The Face):** This handles everything the user sees. It builds the windows, layouts, and panels (like your stats readouts and warehouse storage). It is purely visual and just waits for instructions on what data to display.
 *   **Controller (The Link):** This sits right in the middle acting as the director. When a user clicks a button, drags a speed slider, or toggles pause, the Controller catches that input, tells the Model what to change, and ensures the View updates smoothly.
-
-
 
 ### 📁 Project Architecture
 <details>
@@ -227,13 +278,15 @@ This project is built using the **MVC (Model-View-Controller) pattern**. Instead
 </details>
 
 ---
+## 👋 Goodbye World :D
 
-## Goodbye World :D
-The game is split into specialized "Managers" that handle different parts of the world, one for sounds, one for effects, and one for the game rules.
-This makes the game run smoothly and makes it easy to add new features!
+This simulation was a fantastic learning experience. It taught us a lot about thread safety, resource management, and how remarkably easy it is to spike a CPU to 100% and freeze a computer with just a poorly placed while loop.
 
-But* not gonna lie, there are a bunch of Bugs, That I wish I could fix, unfortunately I have no time :')
-There are a bunch more of cool Features that I wanted to add, for example a Setting screen for button binding a Mute button, Splitting GameLauncher into more Managers like Collision, Paint, State Manager and much more.
-But.. it is what it is :D
+**We hope you enjoy exploring this simulation! If our synchronization logic holds up, your PC shouldn't crash. (Key word: *Shouldn't*...) 🙃**
 
-**Play games, make groups, meet new people, have fun and most importantly.. Enjoy :)**
+---
+<div align="right">
+
+[Back To Top ⬆️](#-hello-world-d)
+
+</div>
