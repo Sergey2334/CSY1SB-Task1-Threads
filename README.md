@@ -34,24 +34,22 @@ To keep things stable, our synchronization logic acts as the mediator to ensure 
 ### 🛠️ Setup Steps
 
 1. **Get the Code:**
-    * **Option A (The Developer Way):** Copy the repository URL from the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;"><> Code ▾</kbd> button at the top right of this page, then clone it via your terminal: `git clone https://github.com/Sergey2334/CSY1SB-Task1-Threads`
-    * **Option B (The Quick Way):** Click the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;"><> Code ▾</kbd> button at the top right of this page and select **Download ZIP**, then extract the files.
+    * **Option A (The Developer Way):** Copy the repository URL from the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;">**`<> Code ▾`**</kbd> button at the top right of this page, then clone it via your terminal: `git clone https://github.com/Sergey2334/CSY1SB-Task1-Threads`
+    * **Option B (The Quick Way):** Click the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;">**`<> Code ▾`**</kbd> button at the top right of this page and select **Download ZIP**, then extract the files.
 
 2. **Open the Project:**
     * Launch your favorite IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea/download/), [Eclipse](https://www.eclipse.org/downloads/), or [NetBeans](https://netbeans.apache.org/front/main/download/)).
     * Open or import the extracted project folder.
    
 3. **Initialize the App:**
-    * Navigate to the `Root` folder and run the `Main` class to pull up the environment interface.
+    * Navigate to the `Root` folder and run the `▶️ Main` class to pull up the environment interface.
 ---
 
 ## 🕹️ Running the Simulation
 
 To kick off the operational workflow, look for and press the button below in the application window:
 
-<kbd style="background-color: #00DD88; color: #ffffff; padding: 7px 14px; border: none; border-radius: 10px; font-weight: bold; font-size: 11px; letter-spacing: 1px;">
-START SIMULATION
-</kbd>
+<kbd style="background-color: #00AA33; color: #ffffff; padding: 7px 14px; border: none; border-radius: 10px; font-weight: bold; font-size: 11px; letter-spacing: 1px;">**`START SIMULATION`**</kbd>
 
 *Once pressed, the multithreaded logistics loop will initialize immediately.*
 
