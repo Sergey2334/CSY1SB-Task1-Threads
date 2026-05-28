@@ -34,8 +34,8 @@ To keep things stable, our synchronization logic acts as the mediator to ensure 
 ### 🛠️ Setup Steps
 
 1. **Get the Code:**
-    * **Option A (The Developer Way):** Copy the repository URL from the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;">**`<> Code ▾`**</kbd> button at the top right of this page, then clone it via your terminal: `git clone https://github.com/Sergey2334/CSY1SB-Task1-Threads`
-    * **Option B (The Quick Way):** Click the green <kbd style="background-color: #238636; color: #ffffff; padding: 3px 8px; border: 1px solid rgba(240,246,252,0.1); border-radius: 6px; font-weight: 600; font-size: 12px;">**`<> Code ▾`**</kbd> button at the top right of this page and select **Download ZIP**, then extract the files.
+    * **Option A (The Developer Way):** Copy the repository URL from the green <sub>![Static Badge](https://img.shields.io/badge/%3C%3E%20Code%20%E2%96%BE---)</sub> button at the top right of this page, then clone it via your terminal: `git clone https://github.com/Sergey2334/CSY1SB-Task1-Threads`
+    * **Option B (The Quick Way):** Click the green <sub>![Static Badge](https://img.shields.io/badge/%3C%3E%20Code%20%E2%96%BE---)</sub> button at the top right of this page and select **Download ZIP**, then extract the files.
 
 2. **Open the Project:**
     * Launch your favorite IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea/download/), [Eclipse](https://www.eclipse.org/downloads/), or [NetBeans](https://netbeans.apache.org/front/main/download/)).
@@ -49,7 +49,7 @@ To keep things stable, our synchronization logic acts as the mediator to ensure 
 
 To kick off the operational workflow, look for and press the button below in the application window:
 
-<kbd style="background-color: #00AA33; color: #ffffff; padding: 7px 14px; border: none; border-radius: 10px; font-weight: bold; font-size: 11px; letter-spacing: 1px;">**`START SIMULATION`**</kbd>
+<sub>![Static Badge](https://img.shields.io/badge/START%20SIMULATION---?style=flat&color=%2300DD88)</sub>
 
 *Once pressed, the multithreaded logistics loop will initialize immediately.*
 
